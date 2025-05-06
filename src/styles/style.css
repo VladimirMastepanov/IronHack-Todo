@@ -1,0 +1,71 @@
+@import './tokens.css';
+:root {
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.5;
+  font-weight: var(--font-weight-light);
+  font-size: var(--font-size-sm);
+  letter-spacing: 0.08em;
+
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+
+  color-scheme: dark light;
+  background-color: var(--color-surface);
+  color: var(--color-primary);
+
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+body, a, p, button, input {
+  margin: 0;
+  padding: 0;
+  border: none;
+
+}
+@keyframes ripple-animation {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+a {
+
+}
+a:hover {
+
+}
+
+body {
+
+}
+
+h1 {
+
+}
+
+button {
+  border-radius: var(--radius-md);
+  padding: 0.2em 1.2em;
+  font-size: 1em;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  contain: paint;
+
+}
+
+
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+/* @media (prefers-color-scheme: light) {
+
+} */
