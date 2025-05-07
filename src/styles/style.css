@@ -1,6 +1,6 @@
-@import './tokens.css';
+@import "./theme.css";
 :root {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   line-height: 1.5;
   font-weight: var(--font-weight-light);
   font-size: var(--font-size-sm);
@@ -12,38 +12,76 @@
 
   color-scheme: dark light;
   background-color: var(--color-surface);
+  /* background-color: var(--color-on-secondary); */
+  /* background-color: var(--color-inverse-on-surface); */
   color: var(--color-primary);
-
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
+
+  /* FONTS */
+  --font-family-primary: "Roboto", sans-serif;
+  --font-family-secondary: "Arial", sans-serif;
+
+  /* FONTS-SIZE */
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 20px;
+  --font-size-xl: 28px;
+  --font-size-2xl: 32px;
+  --font-size-3xl: 57px;
+
+  /* LINE-HEIGHT */
+  --line-height-xs: 16px;
+  --line-height-sm: 20px;
+  --line-height-md: 24px;
+  --line-height-lg: 28px;
+  --line-height-xl: 36px;
+
+  /* FONT-WEIGHT */
+  --font-weight-light: 200;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  /* FONT-BOLD */
+  --font-weight-bold: 700;
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+
+  /* BORDER-RADIUS */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 32px;
+  --radius-round: 50%;
+
+  /* GRID */
+  --grid-column: 1;
 }
-body, a, p, button, input {
+
+body,
+a,
+p,
+button,
+input {
   margin: 0;
   padding: 0;
   border: none;
-
 }
 @keyframes ripple-animation {
   to {
     transform: scale(4);
     opacity: 0;
   }
-}
-
-a {
-
-}
-a:hover {
-
-}
-
-body {
-
-}
-
-h1 {
-
 }
 
 button {
@@ -54,10 +92,7 @@ button {
   overflow: hidden;
   position: relative;
   contain: paint;
-
 }
-
-
 
 #app {
   max-width: 1280px;
@@ -65,7 +100,3 @@ button {
   padding: 2rem;
   text-align: center;
 }
-
-/* @media (prefers-color-scheme: light) {
-
-} */

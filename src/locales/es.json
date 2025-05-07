@@ -1,3 +1,9 @@
 {
-  
+  "buttons": {
+    "changeTheme": "Cambiar tema",
+    "logout": "Cerrar"
+  },
+  "placeholders": {
+    "searchTasks": "Buscar tareas..."
+  }
 }

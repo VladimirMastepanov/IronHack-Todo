@@ -1,22 +1,21 @@
 <script setup lang="ts">
 const props = defineProps<{
-  text: string;
   rippleColor?: string;
   backgroundColor?: string;
   color?: string;
 }>();
 
 const style = {
-  "--ripple-color": props.rippleColor ?? "var(--color-primary)",
-  "--background-color": props.backgroundColor ?? "var(--color-on-primary)",
-  "--color": props.color ?? "var(--color-primary)",
+  "--ripple-color": props.rippleColor ?? "var(--color-on-secondary)",
+  "--background-color": props.backgroundColor ?? "var(--color-secondary)",
+  "--color": props.color ?? "var(--color-on-secondary)",
 };
 </script>
 
 <template>
   <section>
     <button :style="style" v-ripple>
-      {{ props.text }}
+      <slot />
     </button>
   </section>
 </template>
@@ -28,7 +27,7 @@ button {
   overflow: hidden;
   background-color: var(--background-color);
   color: var(--color);
-  padding: var(--space-md);
+  padding: 10px 14px 10px 14px;
   letter-spacing: 0.07em;
 }
 

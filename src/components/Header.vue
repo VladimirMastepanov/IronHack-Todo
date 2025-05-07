@@ -1,14 +1,20 @@
 <script setup lang="ts">
+import { useI18n } from "vue-i18n";
 import Button from "../shered/Button.vue";
-const buttonText = 'Log out'
+import LangSwitcher from "./LangSwitcher.vue";
+import ThemeSwitcher from "./ThemeSwitcher.vue";
+
+const { t } = useI18n();
 </script>
 
 <template>
   <section>
     <header>
       <img src="../assets/avatar.jpg" alt="аватар" />
-      <p>Tasks of Vladimir</p>
-      <Button :text="buttonText" />
+      <ThemeSwitcher />
+      <LangSwitcher />
+
+      <Button>{{ t("buttons.logout") }}</Button>
     </header>
   </section>
 </template>
@@ -19,7 +25,7 @@ header {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  gap: var(--space-sm);
+  gap: var(--space-xs);
 }
 img {
   width: 4rem;
@@ -29,5 +35,4 @@ img {
 p {
   font-weight: var(--font-weight-light);
 }
-
 </style>

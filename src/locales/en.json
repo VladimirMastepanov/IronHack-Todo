@@ -1,3 +1,9 @@
 {
-  
+  "buttons": {
+    "changeTheme": "Change theme",
+    "logout": "Log out"
+  },
+  "placeholders": {
+    "searchTasks": "Search tasks..."
+  }
 }

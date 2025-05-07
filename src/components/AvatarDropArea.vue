@@ -23,39 +23,39 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref } from "vue";
 
-const fileInput = ref<HTMLInputElement | null>(null)
-const previewUrl = ref<string | null>(null)
+const fileInput = ref<HTMLInputElement | null>(null);
+const previewUrl = ref<string | null>(null);
 
 const selectFile = () => {
-  fileInput.value?.click()
-}
+  fileInput.value?.click();
+};
 
 const handleDrop = (e: DragEvent) => {
-  const file = e.dataTransfer?.files[0]
-  if (file && file.type.startsWith('image/')) {
-    readFile(file)
+  const file = e.dataTransfer?.files[0];
+  if (file && file.type.startsWith("image/")) {
+    readFile(file);
   }
-}
+};
 
 const handleFileSelect = (e: Event) => {
-  const target = e.target as HTMLInputElement
-  const file = target.files?.[0]
-  if (file && file.type.startsWith('image/')) {
-    readFile(file)
+  const target = e.target as HTMLInputElement;
+  const file = target.files?.[0];
+  if (file && file.type.startsWith("image/")) {
+    readFile(file);
   }
-}
+};
 
 const readFile = (file: File) => {
-  const reader = new FileReader()
+  const reader = new FileReader();
   reader.onload = () => {
-    previewUrl.value = reader.result as string
+    previewUrl.value = reader.result as string;
     // Тут можно вызвать emit или API-запрос
-    console.log('Файл загружен:', file.name)
-  }
-  reader.readAsDataURL(file)
-}
+    console.log("Файл загружен:", file.name);
+  };
+  reader.readAsDataURL(file);
+};
 </script>
 
 <style scoped>
