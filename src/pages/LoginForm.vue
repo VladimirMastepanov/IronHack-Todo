@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import TasksList from "../widgets/TasksList.vue";
-import TaskControls from "../widgets/TaskControls.vue";
 </script>
 
 <template>
   <section>
     <main>
-      <TaskControls />
-      <TasksList />
+      <div class="auth-main">
+
+      </div>
     </main>
   </section>
 </template>
@@ -23,5 +22,19 @@ main {
   height: 100%;
   width: 100%;
   margin-top: var(--space-md);
+}
+.auth-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: stretch;
+  padding: var(--space-md);
+  gap: var(--space-md);
+
+}
+.auth-main div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 </style>

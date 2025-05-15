@@ -1,13 +1,11 @@
 <script setup lang="ts">
-import TasksList from "../widgets/TasksList.vue";
-import TaskControls from "../widgets/TaskControls.vue";
+
 </script>
 
 <template>
   <section>
     <main>
-      <TaskControls />
-      <TasksList />
+Page Not Found
     </main>
   </section>
 </template>

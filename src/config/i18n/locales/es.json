@@ -1,0 +1,14 @@
+{
+  "buttons": {
+    "changeTheme": "Cambiar tema",
+    "logout": "Cerrar",
+    "login": "Entrar",
+    "addTask": "Añadir tarea"
+  },
+  "placeholders": {
+    "searchTasks": "Buscar tareas..."
+  },
+    "common": {
+        "avatarAlt": "Avatar del perfil de usuario"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "buttons": {
+    "changeTheme": "Change theme",
+    "logout": "Logout",
+    "login": "Login",
+    "addTask": "Add Task"
+  },
+  "placeholders": {
+    "searchTasks": "Search tasks..."
+  },
+  "common": {
+        "avatarAlt": "User profile avatar"
+  }
+}

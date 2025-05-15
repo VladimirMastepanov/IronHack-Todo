@@ -22,13 +22,15 @@ const style = {
 
 <style scoped>
 button {
+  font-size: 1em;
+  cursor: pointer;
   border: none;
+  border-radius: var(--font-size-lg);
   position: relative;
   overflow: hidden;
   background-color: var(--background-color);
   color: var(--color);
-  padding: 10px 14px 10px 14px;
-  letter-spacing: 0.07em;
+  padding: var(--font-size-xxs) var(--font-size-sm);
 }
 
 button::before {

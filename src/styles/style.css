@@ -24,6 +24,7 @@
   --font-family-secondary: "Arial", sans-serif;
 
   /* FONTS-SIZE */
+  --font-size-xxs: 8px;
   --font-size-xs: 12px;
   --font-size-sm: 14px;
   --font-size-md: 16px;
@@ -82,16 +83,6 @@ input {
     transform: scale(4);
     opacity: 0;
   }
-}
-
-button {
-  border-radius: var(--radius-md);
-  padding: 0.2em 1.2em;
-  font-size: 1em;
-  cursor: pointer;
-  overflow: hidden;
-  position: relative;
-  contain: paint;
 }
 
 #app {

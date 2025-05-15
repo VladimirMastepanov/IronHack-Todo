@@ -32,6 +32,7 @@
 
   --color-inverse-surface: #dee3e5;
   --color-inverse-on-surface: #252b2d;
+  --color-inverse-tertiary: #33467a;
 
   --color-outline: #aab3b6;
   --color-outline-variant: #899295;
@@ -69,6 +70,7 @@ html.light-theme {
 
   --color-inverse-surface: #2c3133;
   --color-inverse-on-surface: #ecf2f4;
+  --color-inverse-tertiary: #b3c5ff;
 
   --color-outline: #4b5457;
   --color-outline-variant: #666f71;
