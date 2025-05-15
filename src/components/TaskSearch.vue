@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { useI18n } from "vue-i18n";
 const { t } = useI18n();
+const searchPlaceholder = t('placeholders.search')
 
 </script>
 
 <template>
   <section class="search-form">
-    <input type="search" :placeholder="t('placeholders.search')" />
+    <input type="search" :placeholder="searchPlaceholder" />
   </section>
 </template>
 

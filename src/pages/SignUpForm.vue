@@ -16,12 +16,17 @@ const emailName = "email",
   emailType = "email",
   passwordType = "password";
 
-const email = ref("");
-const password = ref("");
-const passwordConf = ref("");
+const email = ref<string>("");
+const password = ref<string>("");
+const passwordConf = ref<string>("");
+const avatarFile = ref<File | null>(null);
 
-const goBack = () => {
+const goBack = (): void => {
   router.push("/auth");
+};
+
+const handleAvatarSelect = (file: File): void => {
+  avatarFile.value = file;
 };
 
 const submitForm = () => {};
@@ -63,7 +68,7 @@ const submitForm = () => {};
           <p>{{ passwordConf }}</p>
         </div>
         <div>
-          <AvatarDropArea />
+          <AvatarDropArea @upload-avatar="handleAvatarSelect" />
         </div>
         <div>
           <Button>{{ t("buttons.submitSign") }}</Button>

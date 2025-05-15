@@ -1,11 +1,16 @@
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref, defineEmits } from "vue";
 import { useI18n } from "vue-i18n";
 
+
 const { t } = useI18n();
+const avatarPreviewAlt = t('common.avatarPreviewAlt')
 
 const fileInput = ref<HTMLInputElement | null>(null);
 const previewUrl = ref<string | null>(null);
+const emit = defineEmits<{
+  (e: 'upload-avatar', file: File): void
+}>();
 
 const selectFile = () => {
   fileInput.value?.click();
@@ -30,8 +35,8 @@ const readFile = (file: File) => {
   const reader = new FileReader();
   reader.onload = () => {
     previewUrl.value = reader.result as string;
-    // Тут можно вызвать emit или API-запрос
     console.log("Файл загружен:", file.name);
+    emit('upload-avatar', file)
   };
   reader.readAsDataURL(file);
 };
@@ -49,7 +54,7 @@ const readFile = (file: File) => {
       <img
         v-if="previewUrl"
         :src="previewUrl"
-        alt="Avatar preview"
+        :alt="avatarPreviewAlt"
         class="avatar"
       />
       <div v-else>{{ t("common.dropzoneText") }}</div>
@@ -62,6 +67,7 @@ const readFile = (file: File) => {
         @change="handleFileSelect"
       />
     </div>
+    <p>{{ t('common.dropLimits') }}</p>
   </section>
 </template>
 

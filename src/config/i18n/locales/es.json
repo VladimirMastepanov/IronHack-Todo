@@ -26,6 +26,8 @@
     "loginTitle": "Iniciar sesión",
     "signUpTitle": "Crear cuenta",
     "dropzoneText": "Haz clic o suelta la imagen aquí",
-    "dropLimits": "Tamaño máximo: 5 MB. Solo JPG o PNG."
+    "dropLimits": "Tamaño máximo: 5 MB. Solo JPG o PNG.",
+        "avatarPreviewAlt": "Vista previa del avatar"
+
   }
 }

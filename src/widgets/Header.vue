@@ -4,18 +4,13 @@ import { useRouter } from "vue-router";
 import Button from "../shared/Button.vue";
 import LangSwitcher from "../components/LangSwitcher.vue";
 import ThemeSwitcher from "../components/ThemeSwitcher.vue";
-import { computed, ref } from "vue";
+import { ref } from "vue";
 
 const { t } = useI18n();
 const router = useRouter();
-const userId = ref<string>("");
+// const userId = ref<string>("");
 const isAuth = ref<boolean>(true);
-
-const login = ():void => {
-  //store action
-  //check sucsesful
-  router.push(`/dashboard/${userId.value}`);
-};
+const isSubmitting = ref<boolean>(false);
 
 const logout = ():void => {
   //change store
@@ -23,17 +18,7 @@ const logout = ():void => {
   router.push("/auth");
 };
 
-const handleClick = ():void => {
-  if (isAuth.value) {
-    logout();
-  } else {
-    login();
-  }
-};
 
-const buttonText = computed(() =>
-  isAuth.value ? t("buttons.logout") : t("buttons.login")
-);
 </script>
 
 <template>
@@ -43,7 +28,7 @@ const buttonText = computed(() =>
       <ThemeSwitcher />
       <LangSwitcher />
 
-      <Button @click="handleClick">{{ buttonText }}</Button>
+      <Button v-if="isAuth" @click="logout" :disabled="isSubmitting">{{ t("buttons.logout") }}</Button>
     </header>
   </section>
 </template>

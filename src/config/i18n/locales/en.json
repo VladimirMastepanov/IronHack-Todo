@@ -26,6 +26,7 @@
     "loginTitle": "Log in",
     "signUpTitle": "Create account",
     "dropzoneText": "Click or drop image here",
-    "dropLimits": "Max size 5 MB. JPG or PNG only."
+    "dropLimits": "Max size 5 MB. JPG or PNG only.",
+    "avatarPreviewAlt": "Avatar preview"
   }
 }
