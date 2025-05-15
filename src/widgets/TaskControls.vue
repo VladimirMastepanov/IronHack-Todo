@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import TasksControlButtons from "../components/TasksControlButtons.vue";
-import Input from "../shered/Input.vue";
+import Input from "../shared/Input.vue";
 
 const searchValue = ref<string>("");
 const searchPlaceholderText = "placeholders.searchTasks";

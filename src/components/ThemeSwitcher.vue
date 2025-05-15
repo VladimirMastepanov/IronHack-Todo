@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
-import Button from '../shered/Button.vue';
+import Button from '../shared/Button.vue';
 import { useThemeStore} from '../store/theme';
 
 const { t } = useI18n();

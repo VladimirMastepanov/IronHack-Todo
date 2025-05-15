@@ -1,39 +1,35 @@
 <script setup lang="ts">
-import type { RouterLink } from "vue-router";
-import Button from "../shered/Button.vue";
+import Button from "../shared/Button.vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+const navigateToLogin = (): void => {
+  router.push("/login");
+};
+
+const navigateToSignIn = (): void => {
+  router.push("/signin");
+};
 </script>
 
 <template>
   <section>
-    <main>
-      <div class="auth-main">
-        <div>
-          <p>Есть регистрация?</p>
-          
-          <Button><router-link to="">Login</router-link></Button>
-        </div>
-        <div>
-          <p>Здесь первый раз?</p>
-          
-          <Button><router-link to="">Signin</router-link></Button>
-        </div>
+    <div class="auth-main">
+      <div>
+        <p>Есть регистрация?</p>
+        <Button @click="navigateToLogin">Login</Button>
       </div>
-    </main>
+
+      <div>
+        <p>Здесь первый раз?</p>
+        <Button @click="navigateToSignIn">Signin</Button>
+      </div>
+    </div>
   </section>
 </template>
 
 <style scoped>
-main {
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  border-radius: var(--radius-md);
-  background-color: var(--color-tertiary);
-  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
-  height: 100%;
-  width: 100%;
-  margin-top: var(--space-md);
-}
 .auth-main {
   display: flex;
   flex-direction: column;
@@ -41,7 +37,6 @@ main {
   align-items: stretch;
   padding: var(--space-md);
   gap: var(--space-md);
-
 }
 .auth-main div {
   display: flex;

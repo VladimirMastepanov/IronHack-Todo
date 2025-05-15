@@ -1,28 +1,66 @@
 <script setup lang="ts">
+import Button from "../shared/Button.vue";
+import Input from "../shared/Input.vue";
+import { ref } from "vue";
+import { useI18n } from "vue-i18n";
+import { useRouter } from "vue-router";
+
+const {t} = useI18n();
+const router = useRouter();
+
+const emailName = "email",
+  passwordName = "password",
+  emailPlaceholder = "placeholders.email",
+  passwordPlaceholder = "placeholders.password",
+  emailType = "email",
+  passwordType = "password";
+
+const email = ref("");
+const password = ref("");
+
+const goBack = () => {
+router.push('/auth')
+}
+
+const submitForm = () => {};
 </script>
 
 <template>
   <section>
-    <main>
-      <div class="auth-main">
+    <div class="">
+      <h1>{{t('common.loginTitle')}}</h1>
+      <form @submit.prevent="submitForm">
+        <div>
+          <label>{{t('lables.emailLogin')}}</label>
+          <Input
+            v-model:model-value="email"
+            :name="emailName"
+            :placeholder="emailPlaceholder"
+            :type="emailType"
+          />
+          <p>{{ email }}</p>
+        </div>
+        <div>
+          <label>{{t('lables.passwordLogin')}}</label>
+          <Input
+            v-model:model-value="password"
+            :name="passwordName"
+            :placeholder="passwordPlaceholder"
+            :type="passwordType"
+          />
+          <p>{{ password }}</p>
+        </div>
+        <div>
 
-      </div>
-    </main>
+          <Button>{{t('buttons.submitLogin')}}</Button>
+        </div>
+      </form>
+                <Button @click="goBack" >{{t('buttons.return')}}</Button>
+    </div>
   </section>
 </template>
 
 <style scoped>
-main {
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  border-radius: var(--radius-md);
-  background-color: var(--color-tertiary);
-  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
-  height: 100%;
-  width: 100%;
-  margin-top: var(--space-md);
-}
 .auth-main {
   display: flex;
   flex-direction: column;
@@ -30,7 +68,6 @@ main {
   align-items: stretch;
   padding: var(--space-md);
   gap: var(--space-md);
-
 }
 .auth-main div {
   display: flex;

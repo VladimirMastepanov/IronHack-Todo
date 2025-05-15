@@ -3,12 +3,26 @@
     "changeTheme": "Change theme",
     "logout": "Logout",
     "login": "Login",
-    "addTask": "Add Task"
+    "addTask": "Add Task",
+    "return": "Back",
+    "submitLogin": "Send",
+    "submitSign": "Send"
   },
   "placeholders": {
-    "searchTasks": "Search tasks..."
+    "search": "Search tasks...",
+    "email": "email...",
+    "password": "password..."
+  },
+  "lables": {
+    "emailLogin": "Enter your email",
+    "passwordLogin": "Enter your password",
+    "emailSign": "Shoot us your email",
+    "passwordSign": "Choose something secure",
+    "passwordConfirm": "Just to be sure…"
   },
   "common": {
-        "avatarAlt": "User profile avatar"
+    "avatarAlt": "User profile avatar",
+    "loginTitle": "Log in",
+    "signUpTitle": "Create account"
   }
 }

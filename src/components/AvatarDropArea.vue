@@ -1,26 +1,4 @@
-<template>
-  <div
-    class="drop-area"
-    @dragover.prevent
-    @drop.prevent="handleDrop"
-    @click="selectFile"
-  >
-    <img
-      v-if="previewUrl"
-      :src="previewUrl"
-      alt="Avatar preview"
-      class="avatar"
-    />
-    <div v-else class="placeholder">Перетащи файл сюда или кликни</div>
-    <input
-      type="file"
-      accept="image/*"
-      ref="fileInput"
-      class="hidden"
-      @change="handleFileSelect"
-    />
-  </div>
-</template>
+
 
 <script lang="ts" setup>
 import { ref } from "vue";
@@ -57,6 +35,31 @@ const readFile = (file: File) => {
   reader.readAsDataURL(file);
 };
 </script>
+
+
+<template>
+  <div
+    class="drop-area"
+    @dragover.prevent
+    @drop.prevent="handleDrop"
+    @click="selectFile"
+  >
+    <img
+      v-if="previewUrl"
+      :src="previewUrl"
+      alt="Avatar preview"
+      class="avatar"
+    />
+    <div v-else class="placeholder">Перетащи файл сюда или кликни</div>
+    <input
+      type="file"
+      accept="image/*"
+      ref="fileInput"
+      class="hidden"
+      @change="handleFileSelect"
+    />
+  </div>
+</template>
 
 <style scoped>
 .drop-area {

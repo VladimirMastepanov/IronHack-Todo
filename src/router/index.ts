@@ -5,6 +5,7 @@ const Dashboard = () => import("../pages/Dashboard.vue");
 const AuthComponent = () => import("../pages/AuthComponent.vue");
 const NotFound = () => import("../pages/NotFound.vue");
 const LoginForm = () => import("../pages/LoginForm.vue");
+const SignInForm = () => import("../pages/SignInForm.vue");
 
 export const isAuth = ref(false);
 
@@ -19,20 +20,16 @@ const routes = [
     path: "/auth",
     name: "AuthComponent",
     component: AuthComponent,
-    children: [
-      {
-        path: "login",
-        name: "Login",
-        component: AuthComponent,
-        props: { mode: "login" },
-      },
-      {
-        path: "signin",
-        name: "Signin",
-        component: AuthComponent,
-        props: { mode: "signin" },
-      },
-    ],
+  },
+  {
+    path: "/login",
+    name: "Login",
+    component: LoginForm,
+  },
+  {
+    path: "/signin",
+    name: "Signin",
+    component: SignInForm,
   },
   {
     path: "/:catchAll(.*)",
@@ -47,7 +44,11 @@ const router = createRouter({
 });
 
 router.beforeEach((to) => {
-  if (to.meta.requiresAuth && !isAuth.value && to.name !== "AuthComponent") {
+  if (
+    to.meta.requiresAuth &&
+    !isAuth.value &&
+    !to.path.startsWith("AuthComponent")
+  ) {
     return { name: "AuthComponent" };
   }
 });

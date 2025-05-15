@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import Button from "../shered/Button.vue";
+import Button from "../shared/Button.vue";
 import { useI18n } from "vue-i18n";
 
 const { locale } = useI18n();

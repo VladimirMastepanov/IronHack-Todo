@@ -6,7 +6,7 @@ const { t } = useI18n();
 
 <template>
   <section class="search-form">
-    <input type="search" :placeholder="t('placeholders.searchTasks')" />
+    <input type="search" :placeholder="t('placeholders.search')" />
   </section>
 </template>
 

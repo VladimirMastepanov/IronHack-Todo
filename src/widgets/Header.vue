@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
-import Button from "../shered/Button.vue";
+import Button from "../shared/Button.vue";
 import LangSwitcher from "../components/LangSwitcher.vue";
 import ThemeSwitcher from "../components/ThemeSwitcher.vue";
 import { computed, ref } from "vue";

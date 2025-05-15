@@ -3,12 +3,26 @@
     "changeTheme": "Cambiar tema",
     "logout": "Cerrar",
     "login": "Entrar",
-    "addTask": "Añadir tarea"
+    "addTask": "Añadir tarea",
+     "return": "Volver",
+    "submitLogin": "Listo",
+    "submitSign": "Listo"
   },
   "placeholders": {
-    "searchTasks": "Buscar tareas..."
+    "searchTasks": "Buscar tareas...",
+    "email": "correo...",
+    "password": "contraseña..."
   },
-    "common": {
-        "avatarAlt": "Avatar del perfil de usuario"
+  "lables": {
+    "emailLogin": "Tu correo, por favor",
+    "passwordLogin": "Tu contraseña",
+    "emailSign": "Déjanos tu email",
+    "passwordSign": "Elige una contraseña",
+    "passwordConfirm": "Solo para estar seguros…"
+  },
+  "common": {
+    "avatarAlt": "Avatar del perfil de usuario",
+      "loginTitle": "Iniciar sesión",
+    "signUpTitle": "Crear cuenta"
   }
 }

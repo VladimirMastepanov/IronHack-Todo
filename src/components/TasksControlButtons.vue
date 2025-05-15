@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useI18n } from "vue-i18n";
-import Button from "../shered/Button.vue";
+import Button from "../shared/Button.vue";
 import SortByAlphaSvg from "../assets/sort-alphabetical-variant.svg";
 import SortSvg from '../assets/format-list-checks.svg';
 
