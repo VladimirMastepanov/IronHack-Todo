@@ -9,7 +9,7 @@ const navigateToLogin = (): void => {
 };
 
 const navigateToSignIn = (): void => {
-  router.push("/signin");
+  router.push("/signup");
 };
 </script>
 

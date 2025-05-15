@@ -5,7 +5,7 @@ const Dashboard = () => import("../pages/Dashboard.vue");
 const AuthComponent = () => import("../pages/AuthComponent.vue");
 const NotFound = () => import("../pages/NotFound.vue");
 const LoginForm = () => import("../pages/LoginForm.vue");
-const SignInForm = () => import("../pages/SignInForm.vue");
+const SignUpForm = () => import("../pages/SignUpForm.vue");
 
 export const isAuth = ref(false);
 
@@ -27,9 +27,9 @@ const routes = [
     component: LoginForm,
   },
   {
-    path: "/signin",
-    name: "Signin",
-    component: SignInForm,
+    path: "/signup",
+    name: "Signup",
+    component: SignUpForm,
   },
   {
     path: "/:catchAll(.*)",
