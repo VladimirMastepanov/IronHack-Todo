@@ -1,7 +1,8 @@
-
-
 <script lang="ts" setup>
 import { ref } from "vue";
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
 
 const fileInput = ref<HTMLInputElement | null>(null);
 const previewUrl = ref<string | null>(null);
@@ -36,48 +37,49 @@ const readFile = (file: File) => {
 };
 </script>
 
-
 <template>
-  <div
-    class="drop-area"
-    @dragover.prevent
-    @drop.prevent="handleDrop"
-    @click="selectFile"
-  >
-    <img
-      v-if="previewUrl"
-      :src="previewUrl"
-      alt="Avatar preview"
-      class="avatar"
-    />
-    <div v-else class="placeholder">Перетащи файл сюда или кликни</div>
-    <input
-      type="file"
-      accept="image/*"
-      ref="fileInput"
-      class="hidden"
-      @change="handleFileSelect"
-    />
-  </div>
+  <section>
+    <label for="drop">{{ t("lables.dropzoneLable") }}</label>
+    <div
+      class="drop-area"
+      @dragover.prevent
+      @drop.prevent="handleDrop"
+      @click="selectFile"
+    >
+      <img
+        v-if="previewUrl"
+        :src="previewUrl"
+        alt="Avatar preview"
+        class="avatar"
+      />
+      <div v-else>{{ t("common.dropzoneText") }}</div>
+      <input
+        name="drop"
+        type="file"
+        accept="image/*"
+        ref="fileInput"
+        class="hidden"
+        @change="handleFileSelect"
+      />
+    </div>
+  </section>
 </template>
 
 <style scoped>
 .drop-area {
-  border: 2px dashed #ccc;
-  border-radius: 12px;
-  padding: 20px;
+  border: 2px dashed var(--color-outline);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
   text-align: center;
   cursor: pointer;
-  max-width: 200px;
-  margin: auto;
+  margin: var(--space-sm);
 }
 .avatar {
-  max-width: 100%;
-  border-radius: 50%;
+  width: var(--space-4xl);
+  height: var(--space-4xl);
+  border-radius: var(--radius-round);
 }
-.placeholder {
-  color: #888;
-}
+
 .hidden {
   display: none;
 }

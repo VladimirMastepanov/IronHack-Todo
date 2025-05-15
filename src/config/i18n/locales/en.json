@@ -18,11 +18,14 @@
     "passwordLogin": "Enter your password",
     "emailSign": "Shoot us your email",
     "passwordSign": "Choose something secure",
-    "passwordConfirm": "Just to be sure…"
+    "passwordConfirm": "Just to be sure…",
+    "dropzoneLable": "Upload your avatar"
   },
   "common": {
     "avatarAlt": "User profile avatar",
     "loginTitle": "Log in",
-    "signUpTitle": "Create account"
+    "signUpTitle": "Create account",
+    "dropzoneText": "Click or drop image here",
+    "dropLimits": "Max size 5 MB. JPG or PNG only."
   }
 }

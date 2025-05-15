@@ -4,6 +4,7 @@ import Input from "../shared/Input.vue";
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
+import AvatarDropArea from "../components/AvatarDropArea.vue";
 
 const { t } = useI18n();
 const router = useRouter();
@@ -32,7 +33,7 @@ const submitForm = () => {};
       <h1>{{ t("common.signUpTitle") }}</h1>
       <form @submit.prevent="submitForm">
         <div>
-          <label>{{ t("lables.emailSign") }}</label>
+          <label :for="emailName">{{ t("lables.emailSign") }}</label>
           <Input
             v-model:model-value="email"
             :name="emailName"
@@ -42,7 +43,7 @@ const submitForm = () => {};
           <p>{{ email }}</p>
         </div>
         <div>
-          <label>{{ t("lables.passwordSign") }}</label>
+          <label :for="passwordName">{{ t("lables.passwordSign") }}</label>
           <Input
             v-model:model-value="password"
             :name="passwordName"
@@ -52,7 +53,7 @@ const submitForm = () => {};
           <p>{{ password }}</p>
         </div>
         <div>
-          <label>{{ t("lables.passwordConfirm") }}</label>
+          <label :for="passwordConf">{{ t("lables.passwordConfirm") }}</label>
           <Input
             v-model:model-value="passwordConf"
             :name="passwordName"
@@ -60,6 +61,9 @@ const submitForm = () => {};
             :type="passwordType"
           />
           <p>{{ passwordConf }}</p>
+        </div>
+        <div>
+          <AvatarDropArea />
         </div>
         <div>
           <Button>{{ t("buttons.submitSign") }}</Button>

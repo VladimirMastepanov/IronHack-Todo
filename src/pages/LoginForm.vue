@@ -5,7 +5,7 @@ import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 
-const {t} = useI18n();
+const { t } = useI18n();
 const router = useRouter();
 
 const emailName = "email",
@@ -19,8 +19,8 @@ const email = ref("");
 const password = ref("");
 
 const goBack = () => {
-router.push('/auth')
-}
+  router.push("/auth");
+};
 
 const submitForm = () => {};
 </script>
@@ -28,10 +28,10 @@ const submitForm = () => {};
 <template>
   <section>
     <div class="">
-      <h1>{{t('common.loginTitle')}}</h1>
+      <h1>{{ t("common.loginTitle") }}</h1>
       <form @submit.prevent="submitForm">
         <div>
-          <label>{{t('lables.emailLogin')}}</label>
+          <label :for="emailName">{{ t("lables.emailLogin") }}</label>
           <Input
             v-model:model-value="email"
             :name="emailName"
@@ -41,7 +41,7 @@ const submitForm = () => {};
           <p>{{ email }}</p>
         </div>
         <div>
-          <label>{{t('lables.passwordLogin')}}</label>
+          <label :for="passwordName">{{ t("lables.passwordLogin") }}</label>
           <Input
             v-model:model-value="password"
             :name="passwordName"
@@ -51,11 +51,10 @@ const submitForm = () => {};
           <p>{{ password }}</p>
         </div>
         <div>
-
-          <Button>{{t('buttons.submitLogin')}}</Button>
+          <Button>{{ t("buttons.submitLogin") }}</Button>
         </div>
       </form>
-                <Button @click="goBack" >{{t('buttons.return')}}</Button>
+      <Button @click="goBack">{{ t("buttons.return") }}</Button>
     </div>
   </section>
 </template>

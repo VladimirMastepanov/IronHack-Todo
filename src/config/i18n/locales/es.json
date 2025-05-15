@@ -4,7 +4,7 @@
     "logout": "Cerrar",
     "login": "Entrar",
     "addTask": "Añadir tarea",
-     "return": "Volver",
+    "return": "Volver",
     "submitLogin": "Listo",
     "submitSign": "Listo"
   },
@@ -18,11 +18,14 @@
     "passwordLogin": "Tu contraseña",
     "emailSign": "Déjanos tu email",
     "passwordSign": "Elige una contraseña",
-    "passwordConfirm": "Solo para estar seguros…"
+    "passwordConfirm": "Solo para estar seguros…",
+    "dropzoneLable": "Elige una imagen de perfil"
   },
   "common": {
     "avatarAlt": "Avatar del perfil de usuario",
-      "loginTitle": "Iniciar sesión",
-    "signUpTitle": "Crear cuenta"
+    "loginTitle": "Iniciar sesión",
+    "signUpTitle": "Crear cuenta",
+    "dropzoneText": "Haz clic o suelta la imagen aquí",
+    "dropLimits": "Tamaño máximo: 5 MB. Solo JPG o PNG."
   }
 }
