@@ -4,11 +4,8 @@ import Button from '../shared/Button.vue';
 import { useThemeStore} from '../store/theme';
 
 const { t } = useI18n();
-const themeStore = useThemeStore();
-const toggleTheme = () => {
-  console.log('toggleTheme')
-  themeStore.toggleTheme();
-} 
+const {toggleTheme} = useThemeStore();
+
 
 </script>
 
