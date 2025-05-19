@@ -1,15 +1,7 @@
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <section>
-
-Page Not Found
-
-  </section>
+  <section>Page Not Found</section>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -2,14 +2,13 @@
 import { ref, defineEmits } from "vue";
 import { useI18n } from "vue-i18n";
 
-
 const { t } = useI18n();
-const avatarPreviewAlt = t('common.avatarPreviewAlt')
+const avatarPreviewAlt = t("common.avatarPreviewAlt");
 
 const fileInput = ref<HTMLInputElement | null>(null);
 const previewUrl = ref<string | null>(null);
 const emit = defineEmits<{
-  (e: 'upload-avatar', file: File): void
+  (e: "upload-avatar", file: File): void;
 }>();
 
 const selectFile = () => {
@@ -36,7 +35,7 @@ const readFile = (file: File) => {
   reader.onload = () => {
     previewUrl.value = reader.result as string;
     console.log("Файл загружен:", file.name);
-    emit('upload-avatar', file)
+    emit("upload-avatar", file);
   };
   reader.readAsDataURL(file);
 };
@@ -44,7 +43,7 @@ const readFile = (file: File) => {
 
 <template>
   <section>
-    <label for="drop">{{ t("lables.dropzoneLable") }}</label>
+    <label for="drop">{{ t("labels.dropzoneLable") }}</label>
     <div
       class="drop-area"
       @dragover.prevent
@@ -67,7 +66,7 @@ const readFile = (file: File) => {
         @change="handleFileSelect"
       />
     </div>
-    <p>{{ t('common.dropLimits') }}</p>
+    <p>{{ t("common.dropLimits") }}</p>
   </section>
 </template>
 

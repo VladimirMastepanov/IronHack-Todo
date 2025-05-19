@@ -3,21 +3,26 @@
     "changeTheme": "Change theme",
     "logout": "Logout",
     "login": "Login",
+    "signIn": "Sign in",
+    "signUp": "Sign Up",
     "addTask": "Add Task",
     "return": "Back",
     "submitLogin": "Send",
-    "submitSign": "Send"
+    "submitSign": "Send",
+    "forgotPassword": "Forgot your password?"
   },
   "placeholders": {
-    "search": "Search tasks...",
+    "searchTasks": "Search tasks...",
     "email": "email...",
-    "password": "password..."
+    "password": "password...",
+    "name": "name..."
   },
-  "lables": {
+  "labels": {
     "emailLogin": "Enter your email",
     "passwordLogin": "Enter your password",
     "emailSign": "Shoot us your email",
     "passwordSign": "Choose something secure",
+    "nameSign": "Enter your name",
     "passwordConfirm": "Just to be sure…",
     "dropzoneLable": "Upload your avatar"
   },
@@ -27,6 +32,16 @@
     "signUpTitle": "Create account",
     "dropzoneText": "Click or drop image here",
     "dropLimits": "Max size 5 MB. JPG or PNG only.",
-    "avatarPreviewAlt": "Avatar preview"
+    "avatarPreviewAlt": "Avatar preview",
+    "haveAccount": "Already have an account?",
+    "firstTime": "First time here?"
+  },
+  "errors": {
+    "invalidEmail": "Please enter a valid email address.",
+    "invalidName": "Name must be at least 3 characters.",
+    "invalidPassword": "Password must be at least 6 characters.",
+    "passwordsDontMatch": "Passwords do not match.",
+    "avatarTooLarge": "Avatar size must be less than 5MB.",
+    "avatarInvalidType": "Avatar must be a JPG, PNG, or WebP file."
   }
 }

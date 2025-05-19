@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import Button from "../shared/Button.vue";
 import { useRouter } from "vue-router";
+import { useI18n } from "vue-i18n";
 
+const { t } = useI18n();
 const router = useRouter();
 
 const navigateToLogin = (): void => {
@@ -17,13 +19,13 @@ const navigateToSignIn = (): void => {
   <section>
     <div class="auth-main">
       <div>
-        <p>Есть регистрация?</p>
-        <Button @click="navigateToLogin">Login</Button>
+        <p>{{ t("common.haveAccount") }}</p>
+        <Button @click="navigateToLogin">{{ t("buttons.signIn") }}</Button>
       </div>
 
       <div>
-        <p>Здесь первый раз?</p>
-        <Button @click="navigateToSignIn">Signin</Button>
+        <p>{{ t("common.firstTime") }}</p>
+        <Button @click="navigateToSignIn">{{ t("buttons.signUp") }}</Button>
       </div>
     </div>
   </section>

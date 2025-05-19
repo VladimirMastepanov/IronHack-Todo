@@ -5,13 +5,9 @@ import TaskControls from "../widgets/TaskControls.vue";
 
 <template>
   <section>
-
-      <TaskControls />
-      <TasksList />
-
+    <TaskControls />
+    <TasksList />
   </section>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -6,8 +6,28 @@ export const isAvatarTypeValid = (file: File): boolean => {
 };
 
 export const isAvatarSizeValid = (file: File): boolean => {
-  if (file.size > 5 * 1024 *1024) {
+  if (file.size > 5 * 1024 * 1024) {
     return false;
   }
   return true;
-}
+};
+
+export const isPassvordLengthValid = (
+  first: string,
+  second: string
+): boolean => {
+  return first.length === second.length && first.length > 5;
+};
+
+export const isPasswordMarch = (first: string, second: string): boolean => {
+  return first === second;
+};
+
+export const isNameValid = (name: string): boolean => {
+  return name.length > 2;
+};
+
+export const isEmailValid = (email: string): boolean => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};

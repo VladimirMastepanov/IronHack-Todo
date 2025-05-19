@@ -3,21 +3,26 @@
     "changeTheme": "Cambiar tema",
     "logout": "Cerrar",
     "login": "Entrar",
+    "signIn": "Iniciar sesión",
+    "signUp": "Regístrate",
     "addTask": "Añadir tarea",
     "return": "Volver",
     "submitLogin": "Listo",
-    "submitSign": "Listo"
+    "submitSign": "Listo",
+    "forgotPassword": "¿Olvidaste tu contraseña?"
   },
   "placeholders": {
     "searchTasks": "Buscar tareas...",
     "email": "correo...",
-    "password": "contraseña..."
+    "password": "contraseña...",
+    "name": "nombre..."
   },
-  "lables": {
+  "labels": {
     "emailLogin": "Tu correo, por favor",
     "passwordLogin": "Tu contraseña",
     "emailSign": "Déjanos tu email",
     "passwordSign": "Elige una contraseña",
+    "nameSign": "Déjanos tu nombre",
     "passwordConfirm": "Solo para estar seguros…",
     "dropzoneLable": "Elige una imagen de perfil"
   },
@@ -27,7 +32,16 @@
     "signUpTitle": "Crear cuenta",
     "dropzoneText": "Haz clic o suelta la imagen aquí",
     "dropLimits": "Tamaño máximo: 5 MB. Solo JPG o PNG.",
-        "avatarPreviewAlt": "Vista previa del avatar"
-
+    "avatarPreviewAlt": "Vista previa del avatar",
+    "haveAccount": "¿Ya tienes una cuenta?",
+    "firstTime": "¿Primera vez aquí?"
+  },
+  "errors": {
+    "invalidEmail": "Introduce una dirección de correo electrónico válida.",
+    "invalidName": "El nombre debe tener al menos 2 caracteres.",
+    "invalidPassword": "La contraseña debe tener al menos 6 caracteres.",
+    "passwordsDontMatch": "Las contraseñas no coinciden.",
+    "avatarTooLarge": "El avatar debe pesar menos de 5MB.",
+    "avatarInvalidType": "El avatar debe ser un archivo JPG, PNG o WebP."
   }
 }

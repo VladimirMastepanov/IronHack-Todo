@@ -1,40 +1,42 @@
-import { ref } from "vue";
 import { createRouter, createWebHistory } from "vue-router";
-
-const Dashboard = () => import("../pages/Dashboard.vue");
-const AuthComponent = () => import("../pages/AuthComponent.vue");
-const NotFound = () => import("../pages/NotFound.vue");
-const LoginForm = () => import("../pages/LoginForm.vue");
-const SignUpForm = () => import("../pages/SignUpForm.vue");
-
-export const isAuth = ref(false);
+import { useUser } from "../store/user";
 
 const routes = [
   {
     path: "/",
     name: "Dashboard",
-    component: Dashboard,
+    component: () => import("../pages/Dashboard.vue"),
     meta: { requiresAuth: true },
   },
   {
     path: "/auth",
     name: "AuthComponent",
-    component: AuthComponent,
+    component: () => import("../pages/AuthComponent.vue"),
   },
   {
     path: "/login",
     name: "Login",
-    component: LoginForm,
+    component: () => import("../pages/LoginForm.vue"),
   },
   {
     path: "/signup",
     name: "Signup",
-    component: SignUpForm,
+    component: () => import("../pages/SignUpForm.vue"),
   },
   {
     path: "/:catchAll(.*)",
     name: "NotFound",
-    component: NotFound,
+    component: () => import("../pages/NotFound.vue"),
+  },
+  {
+    path: "/forgotpassword",
+    name: "ForgotPassword",
+    component: () => import("../pages/ForgotPasswordForm.vue"),
+  },
+  {
+    path: "/newpassword",
+    name: "NewPassword",
+    component: () => import("../pages/NewPasswordForm.vue"),
   },
 ];
 
@@ -43,14 +45,29 @@ const router = createRouter({
   routes,
 });
 
-router.beforeEach((to) => {
-  if (
-    to.meta.requiresAuth &&
-    !isAuth.value &&
-    !to.path.startsWith("AuthComponent")
-  ) {
+router.beforeEach(async (to) => {
+  const store = useUser();
+
+  await store.getUser();
+
+  if (to.meta.requiresAuth && !store.isAuth) {
     return { name: "AuthComponent" };
   }
-});
 
+  if (
+    store.isAuth &&
+    to.name &&
+    [
+      "AuthComponent",
+      "Login",
+      "Signup",
+      "ForgotPassword",
+      "NewPassword",
+    ].includes(to.name as string)
+  ) {
+    return { name: "Dashboard" };
+  }
+
+  return true;
+});
 export default router;

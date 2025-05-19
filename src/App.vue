@@ -10,7 +10,6 @@ import Header from "./widgets/Header.vue";
 </template>
 
 <style scoped>
-
 main {
   display: flex;
   position: relative;

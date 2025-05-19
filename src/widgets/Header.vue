@@ -5,30 +5,42 @@ import Button from "../shared/Button.vue";
 import LangSwitcher from "../components/LangSwitcher.vue";
 import ThemeSwitcher from "../components/ThemeSwitcher.vue";
 import { ref } from "vue";
+import { useUser } from "../store/user";
+import DefaultAvatar from "../assets/thin/account_circle.svg";
+import { storeToRefs } from "pinia";
+import { computed } from "vue";
 
 const { t } = useI18n();
 const router = useRouter();
-// const userId = ref<string>("");
-const isAuth = ref<boolean>(true);
+const userStore = useUser();
+const { isAuth, user } = storeToRefs(userStore);
+const { logOutUser } = userStore;
 const isSubmitting = ref<boolean>(false);
+const avataeUrl = computed(() => user.value?.image || DefaultAvatar);
 
-const logout = ():void => {
-  //change store
-  localStorage.removeItem("auth");
-  router.push("/auth");
+const logout = async (): Promise<void> => {
+  try {
+    isSubmitting.value = true;
+    await logOutUser();
+    router.push("/auth");
+  } catch (err) {
+    console.error("logout error:", err);
+  } finally {
+    isSubmitting.value = false;
+  }
 };
-
-
 </script>
 
 <template>
   <section>
     <header>
-      <img src="../assets/thin/account_circle.svg" :alt="t('common.avatarAlt')" />
+      <img :src="avataeUrl" :alt="t('common.avatarAlt')" />
       <ThemeSwitcher />
       <LangSwitcher />
 
-      <Button v-if="isAuth" @click="logout" :disabled="isSubmitting">{{ t("buttons.logout") }}</Button>
+      <Button v-if="isAuth" @click="logout" :disabled="isSubmitting">{{
+        t("buttons.logout")
+      }}</Button>
     </header>
   </section>
 </template>
@@ -45,6 +57,7 @@ img {
   width: 4rem;
   height: auto;
   border-radius: var(--radius-round);
+  object-fit: cover;
 }
 p {
   font-weight: var(--font-weight-light);

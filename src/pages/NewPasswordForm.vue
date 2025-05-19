@@ -23,7 +23,8 @@ const goBack = () => {
 };
 
 const forgotPassword = () => {
-  router.push("/forgotpassword");
+  router.push("");
+  //TODO
 };
 
 const submitForm = () => {};
@@ -35,7 +36,7 @@ const submitForm = () => {};
       <h1>{{ t("common.loginTitle") }}</h1>
       <form @submit.prevent="submitForm">
         <div>
-          <label :for="emailName">{{ t("labels.emailLogin") }}</label>
+          <label :for="emailName">{{ t("lables.emailLogin") }}</label>
           <Input
             v-model:model-value="email"
             :name="emailName"
@@ -45,7 +46,7 @@ const submitForm = () => {};
           <p>{{ email }}</p>
         </div>
         <div>
-          <label :for="passwordName">{{ t("labels.passwordLogin") }}</label>
+          <label :for="passwordName">{{ t("lables.passwordLogin") }}</label>
           <Input
             v-model:model-value="password"
             :name="passwordName"
