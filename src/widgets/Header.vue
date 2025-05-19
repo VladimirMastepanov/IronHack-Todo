@@ -9,7 +9,7 @@ import { useUser } from "../store/user";
 import DefaultAvatar from "../assets/thin/account_circle.svg";
 import { storeToRefs } from "pinia";
 import { computed } from "vue";
-
+//TODO check display default avatar
 const { t } = useI18n();
 const router = useRouter();
 const userStore = useUser();

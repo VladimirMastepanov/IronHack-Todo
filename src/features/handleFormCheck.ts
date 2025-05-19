@@ -14,8 +14,9 @@ export const isAvatarSizeValid = (file: File): boolean => {
 
 export const isPassvordLengthValid = (
   first: string,
-  second: string
+  second?: string
 ): boolean => {
+  if(!second) return first.length > 5; 
   return first.length === second.length && first.length > 5;
 };
 

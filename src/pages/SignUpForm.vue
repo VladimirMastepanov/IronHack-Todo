@@ -15,13 +15,10 @@ import {
   isPassvordLengthValid,
   isPasswordMarch,
 } from "../features/handleFormCheck";
-import { storeToRefs } from "pinia";
 //TODO оповестить при authError
 const { t } = useI18n();
 const router = useRouter();
-const userStore = useUser();
-const { user } = storeToRefs(userStore);
-const { signUpUser } = userStore;
+const {signUpUser} = useUser();
 
 const emailName = "email",
   passwordName = "password",
@@ -87,11 +84,11 @@ const submitForm = async () => {
     !nameError.value
   ) {
     await signUpUser(name.value, email.value, password.value, avatarFile.value);
+      router.push("/");
   }
 
   isSubmitting.value = false;
-  console.log(user);
-  router.push("/");
+
 };
 </script>
 
@@ -101,7 +98,8 @@ const submitForm = async () => {
       <PreloadSpinner v-if="isSubmitting" class="spinner" />
 
       <h1>{{ t("common.signUpTitle") }}</h1>
-      <form @submit.prevent="submitForm" :aria-disabled="isSubmitting">
+      <form @submit.prevent="submitForm" :aria-disabled="isSubmitting"
+      novalidate>
         <div class="input-grup">
           <label :for="nameName">{{ t("labels.nameSign") }}</label>
           <Input
@@ -159,7 +157,7 @@ const submitForm = async () => {
           }}</Button>
         </div>
       </form>
-      <Button @click="goBack">{{ t("buttons.return") }}</Button>
+      <Button @click="goBack" :disabled="isSubmitting">{{ t("buttons.return") }}</Button>
     </div>
   </section>
 </template>
