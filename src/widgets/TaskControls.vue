@@ -1,23 +1,20 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import TasksControlButtons from "../components/TasksControlButtons.vue";
-import Input from "../shared/Input.vue";
 
-const searchValue = ref<string>("");
-const searchPlaceholderText = "placeholders.searchTasks";
+import TaskSearch from "../components/TaskSearch.vue";
 </script>
 
 <template>
   <section class="controls">
-    <Input
-      :placeholder="searchPlaceholderText"
-      modelKey="search"
-      name="search"
-      type="search"
-      v-model="searchValue"
-    />
+    <TaskSearch />
     <TasksControlButtons />
   </section>
 </template>
 
-<style scoped></style>
+<style scoped>
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+</style>

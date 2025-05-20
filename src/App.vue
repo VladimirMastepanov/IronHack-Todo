@@ -17,8 +17,7 @@ main {
   border-radius: var(--radius-md);
   background-color: var(--color-tertiary);
   box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
-  height: 100%;
-  width: 100%;
-  margin-top: var(--space-md);
+  padding: var(--space-sm);
+  padding-bottom: var(--space-xl);
 }
 </style>

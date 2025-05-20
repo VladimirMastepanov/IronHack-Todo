@@ -6,11 +6,11 @@ const props = defineProps<{
   type: string;
   modelValue: string;
   name: string;
-  id?: string;
+  id: string;
   errorMessage?: string;
   hasError?: string;
 }>();
-const { placeholder, type } = props;
+const { placeholder, type, id } = props;
 const { t } = useI18n();
 const emit = defineEmits<{
   "update:modelValue": [value: string];
@@ -29,6 +29,7 @@ const onInput = (event: Event) => {
     <input
       :value="props.modelValue"
       :type="type"
+      :id="id"
       :placeholder="t(`${placeholder}`)"
       @input="onInput"
     />
@@ -40,7 +41,6 @@ const onInput = (event: Event) => {
   display: flex;
   flex-direction: column;
   border-radius: var(--radius-md);
-  padding: var(--space-sm);
 }
 
 input {

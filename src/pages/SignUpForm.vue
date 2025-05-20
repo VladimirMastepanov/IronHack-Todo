@@ -22,6 +22,7 @@ const {signUpUser} = useUser();
 
 const emailName = "email",
   passwordName = "password",
+  passwordConfigName = 'passwordConfig',
   emailPlaceholder = "placeholders.email",
   passwordPlaceholder = "placeholders.password",
   emailType = "email",
@@ -105,6 +106,7 @@ const submitForm = async () => {
           <Input
             v-model:model-value="name"
             :name="nameName"
+            :id="nameName"
             :placeholder="namePlaceholder"
             :type="nameType"
             :disabled="isSubmitting"
@@ -116,6 +118,7 @@ const submitForm = async () => {
           <Input
             v-model:model-value="email"
             :name="emailName"
+            :id="emailName"
             :placeholder="emailPlaceholder"
             :type="emailType"
             :disabled="isSubmitting"
@@ -127,6 +130,7 @@ const submitForm = async () => {
           <Input
             v-model:model-value="password"
             :name="passwordName"
+            :id="passwordName"
             :placeholder="passwordPlaceholder"
             :type="passwordType"
             :disabled="isSubmitting"
@@ -137,7 +141,8 @@ const submitForm = async () => {
           <label :for="passwordConf">{{ t("labels.passwordConfirm") }}</label>
           <Input
             v-model:model-value="passwordConf"
-            :name="passwordName"
+            :name="passwordConfigName"
+            :id="passwordConfigName"
             :placeholder="passwordPlaceholder"
             :type="passwordType"
             :disabled="isSubmitting"

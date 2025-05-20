@@ -1,36 +1,45 @@
 <script setup lang="ts">
 import { useI18n } from "vue-i18n";
+import Input from "../shared/Input.vue";
+import { ref } from "vue";
 const { t } = useI18n();
-const searchPlaceholder = t('placeholders.search')
 
+const serchTerm = ref<string>(""),
+  searchName = "search",
+  searchType = "search",
+  searchPlaceholder = "placeholders.searchTasks",
+  searchLable = t('') //TODO
+
+  const onSearch = () => {} //TODO
 </script>
 
 <template>
-  <section class="search-form">
-    <input type="search" :placeholder="searchPlaceholder" />
+  <section>
+    <div class="search-form" role="search">
+      <label :for="searchName" class="lable-hidden">{{ searchLable }}</label>
+      <Input v-model:model-value="serchTerm"
+      :name="searchName"
+      :id="searchName"
+      :placeholder="searchPlaceholder"
+      :type="searchType"
+      @input="onSearch" />
+    </div>
   </section>
 </template>
 
 <style scoped>
 .search-form {
-  display: flex;
-  flex-direction: column;
-  border-radius: var(--radius-md);
-  padding: var(--space-sm);
-
+  position: relative;
 }
-
-input {
-  all: unset;
-  padding: var(--space-xs) var(--space-xs) var(--space-xs) var(--space-md);
-  text-align: left;
-  background-color: var(--color-tertiary);
-  border: 1px var(--color-outline) solid;
-  border-radius: var(--radius-lg);
-  color: var(--color-on-tertiary);
-  font-size: var(--font-size-md);
+.lable-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
-
 </style>
-
-

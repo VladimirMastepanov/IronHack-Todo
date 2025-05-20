@@ -46,10 +46,10 @@
   --font-weight-medium: 500;
   --font-weight-bold: 700;
 
-  /* FONT-BOLD */
-  --font-weight-bold: 700;
-
   /* Spacing */
+  --space-cards-sm: -30px;
+  --space-cards-md: -60px;
+  --space-card-lg: -80px;
   --space-xs: 4px;
   --space-sm: 8px;
   --space-md: 16px;
@@ -90,5 +90,8 @@ input {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
   text-align: center;
 }

@@ -49,7 +49,7 @@ const buttonControlRipple = "var(--color-error)";
   flex-direction: row;
   justify-content: space-between;
   gap: var(--space-xs);
-  margin: 0 var(--space-sm);
+  /* margin: 0 var(--space-sm); */
   align-items: center;
 }
 .control {

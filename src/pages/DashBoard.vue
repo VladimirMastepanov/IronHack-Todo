@@ -4,10 +4,16 @@ import TaskControls from "../widgets/TaskControls.vue";
 </script>
 
 <template>
-  <section>
+  <section >
     <TaskControls />
     <TasksList />
   </section>
 </template>
 
-<style scoped></style>
+<style scoped>
+section {
+display: flex;
+flex-direction: column;
+gap: var(--space-md);
+}
+</style>

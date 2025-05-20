@@ -1,7 +1,7 @@
 {
   "buttons": {
     "changeTheme": "Cambiar tema",
-    "logout": "Cerrar",
+    "logout": "Salir",
     "login": "Entrar",
     "signIn": "Iniciar sesión",
     "signUp": "Regístrate",

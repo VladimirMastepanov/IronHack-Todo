@@ -15,8 +15,8 @@ const { t } = useI18n();
 const router = useRouter();
 const { loginUser } = useUser();
 
-const emailName = "email",
-  passwordName = "password",
+const emailName = "emailLogin",
+  passwordName = "passwordLogin",
   emailPlaceholder = "placeholders.email",
   passwordPlaceholder = "placeholders.password",
   emailType = "email",
@@ -71,6 +71,7 @@ const submitForm = async () => {
           <Input
             v-model:model-value="email"
             :name="emailName"
+            :id="emailName"
             :placeholder="emailPlaceholder"
             :type="emailType"
             :disabled="isSubmitting"
@@ -82,6 +83,7 @@ const submitForm = async () => {
           <Input
             v-model:model-value="password"
             :name="passwordName"
+            :id="passwordName"
             :placeholder="passwordPlaceholder"
             :type="passwordType"
             :disabled="isSubmitting"
