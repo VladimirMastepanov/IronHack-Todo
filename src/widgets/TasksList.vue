@@ -1,12 +1,25 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { type EditedTaskDescription } from "../types/types";
+import { type EditedTaskDescription, type TaskDescription } from "../types/types";
 import Button from "../shared/Button.vue";
 import Textarea from "../shared/Textarea.vue";
 import { useTasks } from "../store/task";
 import { storeToRefs } from "pinia";
 import { onMounted } from "vue";
 import { useI18n } from "vue-i18n";
+import { useSort } from "../store/sort";
+import { computed } from "vue";
+import ArrowDownSvg from "../assets/arrow_down.svg";
+import ArrowUpSvg from "../assets/arrow_up.svg";
+import CheckOutlineIcon from '../assets/check_box_outline.svg';
+import CheckDoneIcon from '../assets/check_box_done.svg';
+import { useSearch } from "../store/search";
+import { getFiltredTasks } from "../features/getFiltredTasks";
+import { getSortedTasks } from "../features/getSortedTasks";
+
+const searchStore = useSearch();
+const sortStore = useSort();
+const { sortBy } = storeToRefs(sortStore);
 
 const tasksStore = useTasks();
 const { tasks } = storeToRefs(tasksStore);
@@ -16,11 +29,20 @@ onMounted(async () => {
   tasksStore.getTasksFromDb();
 });
 
+const tasksForDisplay = computed(() => {
+  if (searchStore.searchTerm.length > 0) {
+    const filtred = getFiltredTasks(tasks.value, searchStore.searchTerm);
+    return getSortedTasks(filtred, sortBy.value);
+  } else {
+    return getSortedTasks(tasks.value, sortBy.value);
+  }
+  
+});
+
 const { t } = useI18n();
 
 const taskText = ref<string>(""),
   taskImpartance = ref<1 | 2 | 3>(1),
-  taskColor = ref<string>(""),
   taskInputName = "",
   taskInputLabel = t("labels.new"),
   isSubmitting = ref<boolean>(false),
@@ -37,42 +59,38 @@ const openCard = (id: number): void => {
     originalTask.value = {
       text: currentTask.text,
       importance: currentTask.importance,
-      color: currentTask.color,
     };
     taskText.value = currentTask.text;
     taskImpartance.value = currentTask.importance;
-    taskColor.value = currentTask.color;
   }
 };
 const closeCard = (): void => {
   taskText.value = "";
   taskImpartance.value = 1;
-  taskColor.value = "";
   openedCardId.value = null;
 };
 
-const clearInput = (): void => {
-  taskText.value = "";
-};
-const saveChanges = async (id: number, text: string, importance: 1 | 2 | 3, color: string) => {
-  taskErrorMessage.value = '';
-  if (taskText.value.length === 0 ) {
-    taskErrorMessage.value = t('errors.emptyError');
+
+const saveChanges = async (
+  id: number,
+  text: string,
+  importance: 1 | 2 | 3,
+) => {
+  taskErrorMessage.value = "";
+  if (taskText.value.length === 0) {
+    taskErrorMessage.value = t("errors.emptyError");
   } else {
     isSubmitting.value = true;
-    await updateTaskInDb(id, text, importance, color);
+    await updateTaskInDb(id, text, importance);
     closeCard();
     isSubmitting.value = false;
-
   }
 };
-
 
 const cancelChanges = (): void => {
   if (originalTask.value && openedCardId.value !== null) {
     taskText.value = originalTask.value.text;
     taskImpartance.value = originalTask.value.importance;
-    taskColor.value = originalTask.value.color;
   }
 };
 
@@ -93,13 +111,16 @@ const deleteTask = async (taskId: number) => {
   <section>
     <div class="tasks-list" aria-live="polite">
       <ul>
-        <li v-for="task in tasks" :key="task.id" class="task-wrapper">
+        <li v-for="task in tasksForDisplay" :key="task.id" class="task-wrapper" >
           <section>
             <div class="list-element-container">
               <template v-if="openedCardId !== task.id">
-                <Button @click="openCard(task.id)">V</Button>
+
+                <ArrowDownSvg @click="openCard(task.id)" class="svg" fill="var(--color-on-secondary)"
+                />
                 <p>{{ task.text }}</p>
-                <div>O</div>
+                <CheckDoneIcon :key="`done-${task.id}`" @click="toggleTaskIsDone(task.id, task.isDone)" fill="var(--color-on-secondary)" class="svg" v-if="task.isDone" />
+                <CheckOutlineIcon :key="`outline-${task.id}`" @click="toggleTaskIsDone(task.id, task.isDone)" fill="var(--color-on-secondary)" class="svg" v-else />
               </template>
               <template v-else>
                 <div class="task-form">
@@ -125,15 +146,16 @@ const deleteTask = async (taskId: number) => {
                       <option value="2">2</option>
                       <option value="3">3</option>
                     </select>
-                    <label>{{ t("labels.color") }}</label>
-                    <input type="color" v-model="taskColor" />
                   </div>
 
                   <div class="task-form-row controls">
                     <div class="go-back">
-                      <Button :disabled="isSubmitting" @click="closeCard()"
-                        >A</Button
-                      >
+
+                      <ArrowUpSvg
+                      @click="closeCard()"
+                          class="svg"
+                          fill="var(--color-on-secondary)"
+                      />
                     </div>
 
                     <div class="buttons">
@@ -145,9 +167,17 @@ const deleteTask = async (taskId: number) => {
                       <Button :disabled="isSubmitting" @click="cancelChanges">{{
                         t("buttons.cancel")
                       }}</Button>
-                      <Button :disabled="isSubmitting" @click="saveChanges(task.id, taskText, taskImpartance, taskColor)">{{
-                        t("buttons.save")
-                      }}</Button>
+                      <Button
+                        :disabled="isSubmitting"
+                        @click="
+                          saveChanges(
+                            task.id,
+                            taskText,
+                            taskImpartance,
+                          )
+                        "
+                        >{{ t("buttons.save") }}</Button
+                      >
                     </div>
                   </div>
                 </div>
@@ -168,6 +198,11 @@ const deleteTask = async (taskId: number) => {
   width: 100%;
   height: 100%;
   gap: var(--space-sm);
+}
+.svg {
+  padding: 0;
+  height: 1.5em;
+  width: auto;
 }
 
 .task-form-row {
@@ -238,6 +273,7 @@ ul {
 }
 .go-back {
   display: flex;
+  align-items: flex-end;
 }
 .buttons {
   display: flex;

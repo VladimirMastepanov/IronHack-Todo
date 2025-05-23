@@ -27,7 +27,6 @@ export const useTasks = defineStore("tasks", () => {
   const insertTaskToDb = async (
     text: string,
     userId: string,
-    color: string,
     importance: 1 | 2 | 3
   ) => {
     try {
@@ -37,7 +36,6 @@ export const useTasks = defineStore("tasks", () => {
           {
             text,
             userId,
-            color,
             importance,
             isDone: false,
           },
@@ -57,10 +55,11 @@ export const useTasks = defineStore("tasks", () => {
   };
 
   const toggleTaskIsDone = async (id: number, isDone: boolean) => {
+    const newValue = !isDone
     try {
       const { data, error } = await supabase
         .from("tasks")
-        .update({ isDone })
+        .update({ isDone: newValue })
         .eq("id", id)
         .select();
 
@@ -68,8 +67,9 @@ export const useTasks = defineStore("tasks", () => {
         if (error) taskError.value = error.message;
         throw error;
       }
+      console.log(data)
       tasks.value = tasks.value.map((t) =>
-        t.id === id ? { ...t, isDone } : t
+        t.id === id ? { ...t, isDone: newValue } : t
       );
     } catch (err) {
       console.error("toggleTaskIsDone error:", err);
@@ -80,7 +80,6 @@ export const useTasks = defineStore("tasks", () => {
     id: number,
     text: string,
     importance: 1 | 2 | 3,
-    color: string
   ) => {
     try {
       const { data, error } = await supabase
@@ -88,7 +87,6 @@ export const useTasks = defineStore("tasks", () => {
         .update({
           text,
           importance,
-          color,
         })
         .eq("id", id)
         .select();
@@ -98,7 +96,7 @@ export const useTasks = defineStore("tasks", () => {
         throw error;
       }
       tasks.value = tasks.value.map((t) =>
-        t.id === id ? { ...t, text, importance, color } : t
+        t.id === id ? { ...t, text, importance } : t
       );
     } catch (err) {
       console.error("updateTaskInDb error:", err);

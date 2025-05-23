@@ -10,7 +10,7 @@
     "submitLogin": "Listo",
     "submitSign": "Listo",
     "save": "Guardar",
-    "cancel": "Cancelar cambios",
+    "cancel": "Cancelar",
     "forgotPassword": "¿Olvidaste tu contraseña?"
   },
   "placeholders": {
@@ -31,7 +31,8 @@
     "dropzoneLable": "Elige una imagen de perfil",
     "color": "Color de la tarea",
     "importance": "Importancia de la tarea",
-    "new": "Escribe la descripción de la tarea"
+    "new": "Escribe la descripción de la tarea",
+    "search": "Buscar tareas"
   },
   "common": {
     "avatarAlt": "Avatar del perfil de usuario",

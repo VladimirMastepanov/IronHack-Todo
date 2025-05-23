@@ -2,6 +2,7 @@
 import { computed } from "vue";
 import Button from "../shared/Button.vue";
 import { useI18n } from "vue-i18n";
+import LangIcon from '../assets/language.svg';
 
 const { locale } = useI18n();
 
@@ -15,8 +16,16 @@ const toggleLang = (): void => {
 
 <template>
   <section>
-    <Button @click="toggleLang">{{ nextLang }}</Button>
+    <Button @click="toggleLang">
+      <LangIcon fill="var(--color-on-secondary)" class="svg"  />
+    </Button>
   </section>
 </template>
 
-<style scoped></style>
+<style scoped>
+.svg {
+  padding: 0;
+  height: 1em; 
+  width: auto;
+ }
+</style>

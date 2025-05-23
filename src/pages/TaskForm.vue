@@ -17,7 +17,6 @@ const{t} = useI18n();
 
 const taskText = ref<string>(""),
   taskImpartance = ref<1 | 2 | 3>(1),
-  taskColor = ref<string>(""),
   taskInputName = "",
 
 
@@ -29,9 +28,7 @@ const taskText = ref<string>(""),
 const closeForm = (): void => {
   router.push("/");
 };
-const clearInput = (): void => {
-  taskText.value = "";
-};
+
 const saveChanges = async () => {
   taskErrorMessage.value = "";
   if (taskText.value.length === 0) {
@@ -42,7 +39,6 @@ const saveChanges = async () => {
       await insertTaskToDb(
         taskText.value,
         user.id,
-        taskColor.value,
         taskImpartance.value
       );
       router.push("/");
@@ -76,8 +72,6 @@ const saveChanges = async () => {
             <option value="2">2</option>
             <option value="3">3</option>
           </select>
-          <label>{{t('labels.color')}}</label>
-          <input type="color" v-model="taskColor" :disabled="isSubmitting" />
         </div>
 
         <div class="task-form-row buttons">

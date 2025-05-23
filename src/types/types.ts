@@ -15,15 +15,14 @@ export interface TaskDescription {
   importance: 1 | 2 | 3;
   createdAt: string; //TODO
   isDone: boolean;
-  color: string;
 }
 
 export interface EditedTaskDescription {
   text: string;
   importance: 1 | 2 | 3;
-  color: string;
 }
 
 export interface SignupDataDescription {
-
 }
+
+export type SortType = "none" | "importance" | "text" | "status";

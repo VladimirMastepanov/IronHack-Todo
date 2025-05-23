@@ -30,7 +30,8 @@
     "dropzoneLable": "Upload your avatar",
     "color": "Task color",
     "importance": "Task importance",
-    "new": "Enter task description"
+    "new": "Enter task description",
+    "search": "Search tasks"
   },
   "common": {
     "avatarAlt": "User profile avatar",

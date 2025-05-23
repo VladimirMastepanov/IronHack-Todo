@@ -6,7 +6,7 @@ import LangSwitcher from "../components/LangSwitcher.vue";
 import ThemeSwitcher from "../components/ThemeSwitcher.vue";
 import { ref } from "vue";
 import { useUser } from "../store/user";
-import DefaultAvatar from "../assets/thin/account_circle.svg";
+import DefaultAvatar from "../assets/account_circle.svg";
 import { storeToRefs } from "pinia";
 import { computed } from "vue";
 //TODO check display default avatar
@@ -35,12 +35,19 @@ const logout = async (): Promise<void> => {
   <section>
     <header>
       <img :src="avataeUrl" :alt="t('common.avatarAlt')" />
-      <ThemeSwitcher />
-      <LangSwitcher />
 
-      <Button v-if="isAuth" @click="logout" :disabled="isSubmitting">{{
-        t("buttons.logout")
-      }}</Button>
+      <div class="header-buttons">
+        <ThemeSwitcher />
+        <LangSwitcher />
+
+        <Button
+          class="logout"
+          v-if="isAuth"
+          @click="logout"
+          :disabled="isSubmitting"
+          >{{ t("buttons.logout") }}</Button
+        >
+      </div>
     </header>
   </section>
 </template>
@@ -52,6 +59,16 @@ header {
   justify-content: space-between;
   align-items: center;
   gap: var(--space-xs);
+}
+.header-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-xs);
+  justify-content: end;
+}
+.logout {
+  padding: 0 0 0 var(--font-size-sm);
 }
 img {
   width: 4rem;
