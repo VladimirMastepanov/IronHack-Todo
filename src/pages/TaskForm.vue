@@ -1,30 +1,29 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import {
-  type TaskDescription,
-  type EditedTaskDescription,
-} from "../types/types";
 import Button from "../shared/Button.vue";
+import Textarea from "../shared/Textarea.vue";
 import { useRouter } from "vue-router";
 import { useTasks } from "../store/task";
 import { useUser } from "../store/user";
 import { storeToRefs } from "pinia";
+import { useI18n } from "vue-i18n";
 
 const router = useRouter();
 const tasksStore = useTasks();
 const { tasks } = storeToRefs(tasksStore);
 const { user } = useUser();
 const { insertTaskToDb } = tasksStore;
+const{t} = useI18n();
 
 const taskText = ref<string>(""),
   taskImpartance = ref<1 | 2 | 3>(1),
   taskColor = ref<string>(""),
   taskInputName = "",
-  taskInputType = "text",
-  taskInputPlaceholder = "placeholder.", //TODO Enter task description...
-  taskInputLabel = "label.", //TODO Task description
+
+
+  taskInputLabel = t('labels.new'), 
   taskInputId = "add-task-form",
-  taskErroeMessage = ref<string>(""), //TODO
+  taskErrorMessage = ref<string>(""),
   isSubmitting = ref<boolean>(false);
 
 const closeForm = (): void => {
@@ -34,9 +33,9 @@ const clearInput = (): void => {
   taskText.value = "";
 };
 const saveChanges = async () => {
-  taskErroeMessage.value = "";
+  taskErrorMessage.value = "";
   if (taskText.value.length === 0) {
-    taskErroeMessage.value = "ты забыл записать задачу";
+    taskErrorMessage.value = t('errors.emptyError');
   } else {
     isSubmitting.value = true;
     if (user && user.id) {
@@ -61,27 +60,23 @@ const saveChanges = async () => {
           <label :for="taskInputId" class="lable-hidden">{{
             taskInputLabel
           }}</label>
-          <textarea
-            class="input"
-            v-model:="taskText"
+          <Textarea
+          class="textarea"
+            v-model="taskText"
             :name="taskInputName"
             :id="taskInputId"
-            :type="taskInputType"
-            :placeholder="taskInputPlaceholder"
-            rows="6"
             :disabled="isSubmitting"
-          ></textarea>
-          <Button @click="clearInput" :disabled="isSubmitting">x</Button>
+           />
         </div>
-        <p class="error">{{ taskErroeMessage || "\u00A0" }}</p>
+        <p class="error">{{ taskErrorMessage || "\u00A0" }}</p>
         <div class="task-form-row controls">
-          <label>Importance:</label>
+          <label>{{t('labels.importance')}}</label>
           <select v-model.number="taskImpartance" :disabled="isSubmitting">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
           </select>
-          <label>Color:</label>
+          <label>{{t('labels.color')}}</label>
           <input type="color" v-model="taskColor" :disabled="isSubmitting" />
         </div>
 
@@ -89,9 +84,9 @@ const saveChanges = async () => {
           <Button
             :disabled="tasks.length === 0 || isSubmitting"
             @click="closeForm"
-            >X</Button
+            >Go back</Button
           >
-          <Button @click="saveChanges" :disabled="isSubmitting">Save</Button>
+          <Button @click="saveChanges" :disabled="isSubmitting">{{t('buttons.save')}}</Button>
         </div>
       </div>
     </div>
@@ -99,20 +94,7 @@ const saveChanges = async () => {
 </template>
 
 <style scoped>
-textarea {
-  all: unset;
-  resize: none;
-  text-align: left;
-  padding: var(--space-sm);
-  background-color: var(--color-tertiary);
-  border: 1px var(--color-outline) solid;
-  border-radius: var(--radius-sm);
-  color: var(--color-on-tertiary);
-  font-size: var(--font-size-md);
-}
-.input {
-  width: 100%;
-}
+
 .task-form {
   display: flex;
   flex-direction: column;
@@ -128,10 +110,15 @@ textarea {
 .task-form-row {
   display: flex;
   gap: var(--space-sm);
+  width: 100%;
 }
 .controls {
   justify-content: end;
   gap: var(--space-sm);
+}
+.textarea {
+  display: flex;
+  width: 100%;
 }
 
 .buttons {

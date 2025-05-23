@@ -108,6 +108,7 @@ export const useTasks = defineStore("tasks", () => {
   const removeTaskFromDb = async (id: number) => {
     try {
       const { error } = await supabase.from("tasks").delete().eq("id", id);
+      tasks.value = tasks.value.filter((t) => t.id !== id);
 
       if (error) {
         taskError.value = error.message;

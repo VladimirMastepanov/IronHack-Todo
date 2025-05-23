@@ -9,13 +9,16 @@
     "return": "Back",
     "submitLogin": "Send",
     "submitSign": "Send",
+    "save": "Save",
+    "cancel": "Cancel changes",
     "forgotPassword": "Forgot your password?"
   },
   "placeholders": {
     "searchTasks": "Search tasks...",
     "email": "email...",
     "password": "password...",
-    "name": "name..."
+    "name": "name...",
+    "textarea": "task description..."
   },
   "labels": {
     "emailLogin": "Enter your email",
@@ -24,7 +27,10 @@
     "passwordSign": "Choose something secure",
     "nameSign": "Enter your name",
     "passwordConfirm": "Just to be sure…",
-    "dropzoneLable": "Upload your avatar"
+    "dropzoneLable": "Upload your avatar",
+    "color": "Task color",
+    "importance": "Task importance",
+    "new": "Enter task description"
   },
   "common": {
     "avatarAlt": "User profile avatar",
@@ -42,6 +48,7 @@
     "invalidPassword": "Password must be at least 6 characters.",
     "passwordsDontMatch": "Passwords do not match.",
     "avatarTooLarge": "Avatar size must be less than 5MB.",
-    "avatarInvalidType": "Avatar must be a JPG, PNG, or WebP file."
+    "avatarInvalidType": "Avatar must be a JPG, PNG, or WebP file.",
+    "emptyError": "You forgot to enter a task"
   }
 }

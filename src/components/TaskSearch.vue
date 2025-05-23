@@ -8,7 +8,7 @@ const serchTerm = ref<string>(""),
   searchName = "search",
   searchType = "search",
   searchPlaceholder = "placeholders.searchTasks",
-  searchLable = t('') //TODO
+  searchLabele = t('') //TODO
 
   const onSearch = () => {} //TODO
 </script>
@@ -16,7 +16,7 @@ const serchTerm = ref<string>(""),
 <template>
   <section>
     <div class="search-form" role="search">
-      <label :for="searchName" class="lable-hidden">{{ searchLable }}</label>
+      <label :for="searchName" class="lable-hidden">{{ searchLabele }}</label>
       <Input v-model:model-value="serchTerm"
       :name="searchName"
       :id="searchName"

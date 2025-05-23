@@ -1,29 +1,30 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import {
-  type TaskDescription,
-  type EditedTaskDescription,
-} from "../types/types";
+import { type EditedTaskDescription } from "../types/types";
 import Button from "../shared/Button.vue";
-import Input from "../shared/Input.vue";
+import Textarea from "../shared/Textarea.vue";
 import { useTasks } from "../store/task";
 import { storeToRefs } from "pinia";
 import { onMounted } from "vue";
+import { useI18n } from "vue-i18n";
 
 const tasksStore = useTasks();
-const {tasks} = storeToRefs(tasksStore);
+const { tasks } = storeToRefs(tasksStore);
+const { removeTaskFromDb, updateTaskInDb, toggleTaskIsDone } = tasksStore;
 
 onMounted(async () => {
   tasksStore.getTasksFromDb();
-})
+});
+
+const { t } = useI18n();
 
 const taskText = ref<string>(""),
   taskImpartance = ref<1 | 2 | 3>(1),
   taskColor = ref<string>(""),
   taskInputName = "",
-  taskInputType = "text",
-  taskInputPlaceholder = "placeholder.", //TODO Enter task description...
-  taskInputLabel = "label."; //TODO Task description
+  taskInputLabel = t("labels.new"),
+  isSubmitting = ref<boolean>(false),
+  taskErrorMessage = ref<string>("");
 
 const originalTask = ref<EditedTaskDescription | null>(null);
 const getTaskInputId = (id: number): string => `task-input-${id}`;
@@ -53,12 +54,37 @@ const closeCard = (): void => {
 const clearInput = (): void => {
   taskText.value = "";
 };
-const saveChanges = (): void => {};
+const saveChanges = async (id: number, text: string, importance: 1 | 2 | 3, color: string) => {
+  taskErrorMessage.value = '';
+  if (taskText.value.length === 0 ) {
+    taskErrorMessage.value = t('errors.emptyError');
+  } else {
+    isSubmitting.value = true;
+    await updateTaskInDb(id, text, importance, color);
+    closeCard();
+    isSubmitting.value = false;
+
+  }
+};
+
+
 const cancelChanges = (): void => {
   if (originalTask.value && openedCardId.value !== null) {
     taskText.value = originalTask.value.text;
     taskImpartance.value = originalTask.value.importance;
     taskColor.value = originalTask.value.color;
+  }
+};
+
+const deleteTask = async (taskId: number) => {
+  taskErrorMessage.value = "";
+  if (taskText.value.length === 0) {
+    taskErrorMessage.value = t("errors.emptyError");
+  } else {
+    isSubmitting.value = true;
+    await removeTaskFromDb(taskId);
+    closeCard();
+    isSubmitting.value = false;
   }
 };
 </script>
@@ -78,37 +104,51 @@ const cancelChanges = (): void => {
               <template v-else>
                 <div class="task-form">
                   <div class="task-form-row task-text">
-                    <Button @click="closeCard()">X</Button>
-
                     <label
                       :for="getTaskInputId(task.id)"
                       class="lable-hidden"
                       >{{ taskInputLabel }}</label
                     >
-                    <Input
-                      v-model:model-value="taskText"
+                    <Textarea
+                      class="textarea"
+                      v-model="taskText"
                       :name="taskInputName"
                       :id="getTaskInputId(task.id)"
-                      :type="taskInputType"
-                      :placeholder="taskInputPlaceholder"
+                      :disabled="isSubmitting"
                     />
-                    <Button @click="clearInput">x</Button>
                   </div>
 
-                  <div class="task-form-row controls">
-                    <label>Importance</label>
+                  <div class="task-form-row settings">
+                    <label>{{ t("labels.importance") }}</label>
                     <select v-model.number="taskImpartance">
                       <option value="1">1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
                     </select>
-                    <label>Color</label>
+                    <label>{{ t("labels.color") }}</label>
                     <input type="color" v-model="taskColor" />
                   </div>
 
                   <div class="task-form-row controls">
-                    <Button @click="cancelChanges">Cancel</Button>
-                    <Button @click="saveChanges">Save</Button>
+                    <div class="go-back">
+                      <Button :disabled="isSubmitting" @click="closeCard()"
+                        >A</Button
+                      >
+                    </div>
+
+                    <div class="buttons">
+                      <Button
+                        :disabled="isSubmitting"
+                        @click="deleteTask(task.id)"
+                        >Delete</Button
+                      >
+                      <Button :disabled="isSubmitting" @click="cancelChanges">{{
+                        t("buttons.cancel")
+                      }}</Button>
+                      <Button :disabled="isSubmitting" @click="saveChanges(task.id, taskText, taskImpartance, taskColor)">{{
+                        t("buttons.save")
+                      }}</Button>
+                    </div>
                   </div>
                 </div>
               </template>
@@ -136,8 +176,17 @@ const cancelChanges = (): void => {
   display: flex;
   flex-direction: row;
 }
-.controls {
+.textarea {
+  display: flex;
+  width: 100%;
+}
+.settings {
+  display: flex;
   justify-content: end;
+  gap: var(--space-sm);
+}
+.controls {
+  justify-content: space-between;
   gap: var(--space-sm);
 }
 .task-text {
@@ -186,5 +235,14 @@ ul {
   background-color: var(--color-tertiary);
   box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
   border: 1px solid var(--color-outline);
+}
+.go-back {
+  display: flex;
+}
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  gap: var(--space-sm);
 }
 </style>

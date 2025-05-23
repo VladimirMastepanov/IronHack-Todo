@@ -9,13 +9,17 @@
     "return": "Volver",
     "submitLogin": "Listo",
     "submitSign": "Listo",
+    "save": "Guardar",
+    "cancel": "Cancelar cambios",
     "forgotPassword": "¿Olvidaste tu contraseña?"
   },
   "placeholders": {
     "searchTasks": "Buscar tareas...",
     "email": "correo...",
     "password": "contraseña...",
-    "name": "nombre..."
+    "name": "nombre...",
+        "textarea": "descripción de la tarea..."
+
   },
   "labels": {
     "emailLogin": "Tu correo, por favor",
@@ -24,7 +28,10 @@
     "passwordSign": "Elige una contraseña",
     "nameSign": "Déjanos tu nombre",
     "passwordConfirm": "Solo para estar seguros…",
-    "dropzoneLable": "Elige una imagen de perfil"
+    "dropzoneLable": "Elige una imagen de perfil",
+    "color": "Color de la tarea",
+    "importance": "Importancia de la tarea",
+    "new": "Escribe la descripción de la tarea"
   },
   "common": {
     "avatarAlt": "Avatar del perfil de usuario",
@@ -42,6 +49,7 @@
     "invalidPassword": "La contraseña debe tener al menos 6 caracteres.",
     "passwordsDontMatch": "Las contraseñas no coinciden.",
     "avatarTooLarge": "El avatar debe pesar menos de 5MB.",
-    "avatarInvalidType": "El avatar debe ser un archivo JPG, PNG o WebP."
+    "avatarInvalidType": "El avatar debe ser un archivo JPG, PNG o WebP.",
+    "emptyError": "Olvidaste ingresar una tarea"
   }
 }
