@@ -38,6 +38,11 @@ const routes = [
     name: "NewPassword",
     component: () => import("../pages/NewPasswordForm.vue"),
   },
+  {
+    path: "/taskform",
+    name: "TaskForm",
+    component: () => import('../pages/TaskForm.vue')
+  }
 ];
 
 const router = createRouter({

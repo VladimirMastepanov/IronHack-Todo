@@ -6,35 +6,16 @@ import {
 } from "../types/types";
 import Button from "../shared/Button.vue";
 import Input from "../shared/Input.vue";
-const tasks = ref<TaskDescription[]>([
-  {
-    text: "some task to do 1",
-    importance: 3,
-    id: 1,
-    userId: "1",
-    createdAt: "date",
-    isDone: true,
-    color: "",
-  },
-  {
-    text: "some task to do 2 some text large then others",
-    importance: 1,
-    id: 2,
-    userId: "1",
-    createdAt: "date",
-    isDone: false,
-    color: "",
-  },
-  {
-    text: "some task to do 3",
-    importance: 2,
-    id: 3,
-    userId: "1",
-    createdAt: "date",
-    isDone: false,
-    color: "",
-  },
-]);
+import { useTasks } from "../store/task";
+import { storeToRefs } from "pinia";
+import { onMounted } from "vue";
+
+const tasksStore = useTasks();
+const {tasks} = storeToRefs(tasksStore);
+
+onMounted(async () => {
+  tasksStore.getTasksFromDb();
+})
 
 const taskText = ref<string>(""),
   taskImpartance = ref<1 | 2 | 3>(1),
@@ -202,7 +183,7 @@ ul {
   align-items: center;
   gap: var(--space-sm);
   border-radius: var(--radius-md);
-  background-color: var(--color-surface);
+  background-color: var(--color-tertiary);
   box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
   border: 1px solid var(--color-outline);
 }

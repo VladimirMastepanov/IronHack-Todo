@@ -33,7 +33,7 @@ const goBack = (): void => {
   router.push("/auth");
 };
 
-const forgotPassword = () => {
+const forgotPassword = (): void => {
   router.push("/forgotpassword");
 };
 
@@ -76,7 +76,7 @@ const submitForm = async () => {
             :type="emailType"
             :disabled="isSubmitting"
           />
-          <p class="error">{{ emailError }}</p>
+          <p class="error">{{ emailError || '\u00A0' }}</p>
         </div>
         <div>
           <label :for="passwordName">{{ t("labels.passwordLogin") }}</label>

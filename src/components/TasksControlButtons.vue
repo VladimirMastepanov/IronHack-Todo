@@ -3,8 +3,10 @@ import { useI18n } from "vue-i18n";
 import Button from "../shared/Button.vue";
 import SortByAlphaSvg from "../assets/sort-alphabetical-variant.svg";
 import SortSvg from '../assets/format-list-checks.svg';
+import { useRouter } from "vue-router";
 
 const { t } = useI18n();
+const router = useRouter();
 
 const buttonAddBackground = "var(--color-on-tertiary)";
 const buttonAddColor = "var(--color-tertiary)";
@@ -13,6 +15,10 @@ const buttonAddRipple = "var(--color-error)";
 const buttonControlBackground = "var(--color-inverse-tertiary)";
 const buttonControlColor = "var(--color-tertiary)";
 const buttonControlRipple = "var(--color-error)";
+
+const toAddTask = () => {
+router.push('/taskform')
+}
 </script>
 
 <template>
@@ -34,7 +40,9 @@ const buttonControlRipple = "var(--color-error)";
     <Button
       :backgroundColor="buttonAddBackground"
       :rippleColor="buttonAddRipple"
-      :color="buttonAddColor">
+      :color="buttonAddColor"
+      @click="toAddTask"
+      >
       <div class="add-task">
         <p>{{ t("buttons.addTask") }}</p>
       </div>
