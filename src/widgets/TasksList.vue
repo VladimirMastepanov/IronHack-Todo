@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { type EditedTaskDescription } from "../types/types";
+import { type EditedTaskDescription, type ImportanceType } from "../types/types";
 import Button from "../shared/Button.vue";
 import Textarea from "../shared/Textarea.vue";
 import { useTasks } from "../store/task";
@@ -17,6 +17,7 @@ import DeleteIcon from "../assets/delete.svg";
 import { useSearch } from "../store/search";
 import { getFiltredTasks } from "../features/getFiltredTasks";
 import { getSortedTasks } from "../features/getSortedTasks";
+import Select from "../shared/Select.vue";
 
 const searchStore = useSearch();
 const sortStore = useSort();
@@ -42,11 +43,12 @@ const tasksForDisplay = computed(() => {
 const { t } = useI18n();
 
 const taskText = ref<string>(""),
-  taskImpartance = ref<1 | 2 | 3>(1),
+  taskImpartance = ref<ImportanceType>(1),
   taskInputName = "",
   taskInputLabel = t("labels.new"),
   isSubmitting = ref<boolean>(false),
   taskErrorMessage = ref<string>("");
+
 
 const originalTask = ref<EditedTaskDescription | null>(null);
 const getTaskInputId = (id: number): string => `task-input-${id}`;
@@ -150,11 +152,12 @@ const deleteTask = async (taskId: number) => {
 
                   <div class="task-form-row settings">
                     <label>{{ t("labels.importance") }}</label>
-                    <select v-model.number="taskImpartance">
+                    <Select v-model="taskImpartance" :option="task.importance"/>
+                    <!-- <select v-model.number="taskImpartance">
                       <option value="1">1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
-                    </select>
+                    </select> -->
                   </div>
 
                   <div class="task-form-row controls">

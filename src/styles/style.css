@@ -68,6 +68,11 @@
 
   /* GRID */
   --grid-column: 1;
+
+  --importance-low: #388E3C;
+  --importance-medium: #FBC02D;
+  --importance-high: #D32F2F;
+
 }
 
 body,

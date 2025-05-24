@@ -51,5 +51,10 @@
     "avatarTooLarge": "Avatar size must be less than 5MB.",
     "avatarInvalidType": "Avatar must be a JPG, PNG, or WebP file.",
     "emptyError": "You forgot to enter a task"
+  },
+    "importance": {
+    "1": "Low",
+    "2": "Medium",
+    "3": "High"
   }
 }

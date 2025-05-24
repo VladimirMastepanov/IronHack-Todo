@@ -10,14 +10,22 @@ export interface TaskDescription {
   id: number;
   userId: string;
   text: string;
-  importance: 1 | 2 | 3;
+  importance: ImportanceType;
   createdAt: string; //TODO
   isDone: boolean;
 }
 
 export interface EditedTaskDescription {
   text: string;
-  importance: 1 | 2 | 3;
+  importance: ImportanceType;
 }
 
 export type SortType = "none" | "importance" | "text" | "status";
+
+export type ImportanceType = 1 | 2 | 3
+
+export interface OptionsDescription {
+label: string;
+value: ImportanceType;
+color: string;
+}

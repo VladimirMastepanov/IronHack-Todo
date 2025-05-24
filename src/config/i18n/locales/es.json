@@ -51,5 +51,10 @@
     "avatarTooLarge": "El avatar debe pesar menos de 5MB.",
     "avatarInvalidType": "El avatar debe ser un archivo JPG, PNG o WebP.",
     "emptyError": "Olvidaste ingresar una tarea"
+  },
+   "importance": {
+    "1": "Baja",
+    "2": "Media",
+    "3": "Alta"
   }
 }
