@@ -41,8 +41,8 @@ const routes = [
   {
     path: "/taskform",
     name: "TaskForm",
-    component: () => import('../pages/TaskForm.vue')
-  }
+    component: () => import("../pages/TaskForm.vue"),
+  },
 ];
 
 const router = createRouter({

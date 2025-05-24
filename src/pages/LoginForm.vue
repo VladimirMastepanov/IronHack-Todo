@@ -22,12 +22,13 @@ const emailName = "emailLogin",
   emailType = "email",
   passwordType = "password";
 
-const email = ref<string>("");
-const password = ref<string>("");
+const email = ref<string>(""),
+  password = ref<string>("");
+
 const isSubmitting = ref<boolean>(false);
 
-const emailError = ref<string>("");
-const passwordError = ref<string>("");
+const emailError = ref<string>(""),
+  passwordError = ref<string>("");
 
 const goBack = (): void => {
   router.push("/auth");
@@ -76,7 +77,7 @@ const submitForm = async () => {
             :type="emailType"
             :disabled="isSubmitting"
           />
-          <p class="error">{{ emailError || '\u00A0' }}</p>
+          <p class="error">{{ emailError || "\u00A0" }}</p>
         </div>
         <div>
           <label :for="passwordName">{{ t("labels.passwordLogin") }}</label>

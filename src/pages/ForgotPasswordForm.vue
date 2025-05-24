@@ -4,7 +4,7 @@ import Input from "../shared/Input.vue";
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
-//TODO 
+//TODO
 const { t } = useI18n();
 const router = useRouter();
 

@@ -2,8 +2,6 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 import type { SortType } from "../types/types";
 
-
-
 export const useSort = defineStore("sort", () => {
   //STATE
   const sortBy = ref<SortType>("none");

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { type EditedTaskDescription, type TaskDescription } from "../types/types";
+import { type EditedTaskDescription } from "../types/types";
 import Button from "../shared/Button.vue";
 import Textarea from "../shared/Textarea.vue";
 import { useTasks } from "../store/task";
@@ -11,8 +11,9 @@ import { useSort } from "../store/sort";
 import { computed } from "vue";
 import ArrowDownSvg from "../assets/arrow_down.svg";
 import ArrowUpSvg from "../assets/arrow_up.svg";
-import CheckOutlineIcon from '../assets/check_box_outline.svg';
-import CheckDoneIcon from '../assets/check_box_done.svg';
+import CheckOutlineIcon from "../assets/check_box_outline.svg";
+import CheckDoneIcon from "../assets/check_box_done.svg";
+import DeleteIcon from "../assets/delete.svg";
 import { useSearch } from "../store/search";
 import { getFiltredTasks } from "../features/getFiltredTasks";
 import { getSortedTasks } from "../features/getSortedTasks";
@@ -36,7 +37,6 @@ const tasksForDisplay = computed(() => {
   } else {
     return getSortedTasks(tasks.value, sortBy.value);
   }
-  
 });
 
 const { t } = useI18n();
@@ -70,12 +70,7 @@ const closeCard = (): void => {
   openedCardId.value = null;
 };
 
-
-const saveChanges = async (
-  id: number,
-  text: string,
-  importance: 1 | 2 | 3,
-) => {
+const saveChanges = async (id: number, text: string, importance: 1 | 2 | 3) => {
   taskErrorMessage.value = "";
   if (taskText.value.length === 0) {
     taskErrorMessage.value = t("errors.emptyError");
@@ -111,16 +106,30 @@ const deleteTask = async (taskId: number) => {
   <section>
     <div class="tasks-list" aria-live="polite">
       <ul>
-        <li v-for="task in tasksForDisplay" :key="task.id" class="task-wrapper" >
+        <li v-for="task in tasksForDisplay" :key="task.id" class="task-wrapper">
           <section>
             <div class="list-element-container">
               <template v-if="openedCardId !== task.id">
-
-                <ArrowDownSvg @click="openCard(task.id)" class="svg" fill="var(--color-on-secondary)"
+                <ArrowDownSvg
+                  @click="openCard(task.id)"
+                  class="svg"
+                  fill="var(--color-on-secondary)"
                 />
                 <p>{{ task.text }}</p>
-                <CheckDoneIcon :key="`done-${task.id}`" @click="toggleTaskIsDone(task.id, task.isDone)" fill="var(--color-on-secondary)" class="svg" v-if="task.isDone" />
-                <CheckOutlineIcon :key="`outline-${task.id}`" @click="toggleTaskIsDone(task.id, task.isDone)" fill="var(--color-on-secondary)" class="svg" v-else />
+                <CheckDoneIcon
+                  :key="`done-${task.id}`"
+                  @click="toggleTaskIsDone(task.id, task.isDone)"
+                  fill="var(--color-on-secondary)"
+                  class="svg"
+                  v-if="task.isDone"
+                />
+                <CheckOutlineIcon
+                  :key="`outline-${task.id}`"
+                  @click="toggleTaskIsDone(task.id, task.isDone)"
+                  fill="var(--color-on-secondary)"
+                  class="svg"
+                  v-else
+                />
               </template>
               <template v-else>
                 <div class="task-form">
@@ -149,33 +158,33 @@ const deleteTask = async (taskId: number) => {
                   </div>
 
                   <div class="task-form-row controls">
-                    <div class="go-back">
-
-                      <ArrowUpSvg
-                      @click="closeCard()"
+                    <div class="left-group">
+                      <div class="up">
+                        <ArrowUpSvg
+                          @click="closeCard()"
                           class="svg"
                           fill="var(--color-on-secondary)"
-                      />
-                    </div>
+                        />
+                      </div>
 
-                    <div class="buttons">
                       <Button
                         :disabled="isSubmitting"
                         @click="deleteTask(task.id)"
-                        >Delete</Button
                       >
+                        <DeleteIcon
+                          fill="var(--color-on-secondary)"
+                          class="delete-icon"
+                        />
+                      </Button>
+                    </div>
+
+                    <div class="buttons">
                       <Button :disabled="isSubmitting" @click="cancelChanges">{{
                         t("buttons.cancel")
                       }}</Button>
                       <Button
                         :disabled="isSubmitting"
-                        @click="
-                          saveChanges(
-                            task.id,
-                            taskText,
-                            taskImpartance,
-                          )
-                        "
+                        @click="saveChanges(task.id, taskText, taskImpartance)"
                         >{{ t("buttons.save") }}</Button
                       >
                     </div>
@@ -200,8 +209,17 @@ const deleteTask = async (taskId: number) => {
   gap: var(--space-sm);
 }
 .svg {
+  padding: 0 var(--space-sm) 0 var(--space-sm);
+  height: 1.4rem;
+  width: 1.4rem;
+  display: flex;
+  flex-shrink: 0;
+}
+.delete-icon {
   padding: 0;
-  height: 1.5em;
+  height: 1.2em;
+  display: flex;
+  justify-content: center;
   width: auto;
 }
 
@@ -222,7 +240,7 @@ const deleteTask = async (taskId: number) => {
 }
 .controls {
   justify-content: space-between;
-  gap: var(--space-sm);
+  gap: var(--space-md);
 }
 .task-text {
   justify-content: start;
@@ -271,7 +289,11 @@ ul {
   box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
   border: 1px solid var(--color-outline);
 }
-.go-back {
+.left-group {
+  display: flex;
+  gap: var(--space-sm);
+}
+.up {
   display: flex;
   align-items: flex-end;
 }
@@ -280,5 +302,10 @@ ul {
   flex-direction: row;
   justify-content: end;
   gap: var(--space-sm);
+}
+
+select {
+  position: relative;
+  font: inherit;
 }
 </style>

@@ -13,16 +13,22 @@ const { toggleTheme } = themeStore;
 <template>
   <section>
     <Button @click="toggleTheme">
-      <LightThemeIcon fill="var(--color-on-secondary)" class="svg" v-if="isLightTheme" />
+      <LightThemeIcon
+        fill="var(--color-on-secondary)"
+        class="svg"
+        v-if="isLightTheme"
+      />
       <DarkThemeIcon fill="var(--color-on-secondary)" class="svg" v-else />
     </Button>
   </section>
 </template>
 
 <style scoped>
- .svg {
+.svg {
   padding: 0;
-  height: 1em; 
+  height: 1.2em;
   width: auto;
- }
+  display: flex;
+
+}
 </style>

@@ -1,4 +1,3 @@
-
 export interface UserDescription {
   id: string;
   name: string;
@@ -6,7 +5,6 @@ export interface UserDescription {
   image: string;
   createdAt: string; //TODO
 }
-
 
 export interface TaskDescription {
   id: number;
@@ -20,9 +18,6 @@ export interface TaskDescription {
 export interface EditedTaskDescription {
   text: string;
   importance: 1 | 2 | 3;
-}
-
-export interface SignupDataDescription {
 }
 
 export type SortType = "none" | "importance" | "text" | "status";

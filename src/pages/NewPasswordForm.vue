@@ -15,8 +15,8 @@ const emailName = "email",
   emailType = "email",
   passwordType = "password";
 
-const email = ref("");
-const password = ref("");
+const email = ref(""),
+  password = ref("");
 
 const goBack = () => {
   router.push("/auth");

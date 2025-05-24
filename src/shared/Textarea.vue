@@ -23,14 +23,13 @@ const onInput = (event: Event) => {
 </script>
 
 <template>
-  <section >
+  <section>
     <textarea
       :value="props.modelValue"
       type="text"
       :id="id"
-      :placeholder="t('placeholders.textarea')" 
+      :placeholder="t('placeholders.textarea')"
       @input="onInput"
-
       row="4"
       :name="name"
     ></textarea>
@@ -38,7 +37,6 @@ const onInput = (event: Event) => {
 </template>
 
 <style scoped>
-
 textarea {
   all: unset;
   resize: none;

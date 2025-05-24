@@ -18,8 +18,7 @@
     "email": "correo...",
     "password": "contraseña...",
     "name": "nombre...",
-        "textarea": "descripción de la tarea..."
-
+    "textarea": "descripción de la tarea..."
   },
   "labels": {
     "emailLogin": "Tu correo, por favor",

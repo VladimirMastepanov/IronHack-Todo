@@ -7,20 +7,19 @@ import { useTasks } from "../store/task";
 import { useUser } from "../store/user";
 import { storeToRefs } from "pinia";
 import { useI18n } from "vue-i18n";
+import ArrowBackIcon from '../assets/arrow_back.svg';
 
 const router = useRouter();
 const tasksStore = useTasks();
 const { tasks } = storeToRefs(tasksStore);
 const { user } = useUser();
 const { insertTaskToDb } = tasksStore;
-const{t} = useI18n();
+const { t } = useI18n();
 
 const taskText = ref<string>(""),
   taskImpartance = ref<1 | 2 | 3>(1),
   taskInputName = "",
-
-
-  taskInputLabel = t('labels.new'), 
+  taskInputLabel = t("labels.new"),
   taskInputId = "add-task-form",
   taskErrorMessage = ref<string>(""),
   isSubmitting = ref<boolean>(false);
@@ -32,15 +31,11 @@ const closeForm = (): void => {
 const saveChanges = async () => {
   taskErrorMessage.value = "";
   if (taskText.value.length === 0) {
-    taskErrorMessage.value = t('errors.emptyError');
+    taskErrorMessage.value = t("errors.emptyError");
   } else {
     isSubmitting.value = true;
     if (user && user.id) {
-      await insertTaskToDb(
-        taskText.value,
-        user.id,
-        taskImpartance.value
-      );
+      await insertTaskToDb(taskText.value, user.id, taskImpartance.value);
       router.push("/");
     }
     isSubmitting.value = false;
@@ -57,16 +52,16 @@ const saveChanges = async () => {
             taskInputLabel
           }}</label>
           <Textarea
-          class="textarea"
+            class="textarea"
             v-model="taskText"
             :name="taskInputName"
             :id="taskInputId"
             :disabled="isSubmitting"
-           />
+          />
         </div>
         <p class="error">{{ taskErrorMessage || "\u00A0" }}</p>
         <div class="task-form-row controls">
-          <label>{{t('labels.importance')}}</label>
+          <label>{{ t("labels.importance") }}</label>
           <select v-model.number="taskImpartance" :disabled="isSubmitting">
             <option value="1">1</option>
             <option value="2">2</option>
@@ -78,9 +73,13 @@ const saveChanges = async () => {
           <Button
             :disabled="tasks.length === 0 || isSubmitting"
             @click="closeForm"
-            >Go back</Button
+            >
+            <ArrowBackIcon fill="var(--color-on-secondary)" class="svg" />
+            </Button
           >
-          <Button @click="saveChanges" :disabled="isSubmitting">{{t('buttons.save')}}</Button>
+          <Button @click="saveChanges" :disabled="isSubmitting">{{
+            t("buttons.save")
+          }}</Button>
         </div>
       </div>
     </div>
@@ -88,12 +87,19 @@ const saveChanges = async () => {
 </template>
 
 <style scoped>
-
 .task-form {
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
+  
+}
+.svg {
+  padding: 0;
+  height: 1.2em;
+  width: auto;
+  margin: 0;
+  display: flex;
 }
 .error {
   color: var(--color-error-container);
@@ -117,6 +123,7 @@ const saveChanges = async () => {
 
 .buttons {
   justify-content: space-between;
+  align-items: center;
   margin-top: var(--space-xl);
 }
 

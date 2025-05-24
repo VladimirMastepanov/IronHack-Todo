@@ -18,11 +18,11 @@ import {
 //TODO оповестить при authError
 const { t } = useI18n();
 const router = useRouter();
-const {signUpUser} = useUser();
+const { signUpUser } = useUser();
 
 const emailName = "email",
   passwordName = "password",
-  passwordConfigName = 'passwordConfig',
+  passwordConfigName = "passwordConfig",
   emailPlaceholder = "placeholders.email",
   passwordPlaceholder = "placeholders.password",
   emailType = "email",
@@ -31,18 +31,18 @@ const emailName = "email",
   namePlaceholder = "placeholders.name",
   nameType = "text";
 
-const email = ref<string>("");
-const name = ref<string>("");
-const password = ref<string>("");
-const passwordConf = ref<string>("");
-const avatarFile = ref<File | null>(null);
+const email = ref<string>(""),
+  name = ref<string>(""),
+  password = ref<string>(""),
+  passwordConf = ref<string>(""),
+  avatarFile = ref<File | null>(null);
 
 const isSubmitting = ref<boolean>(false);
 
-const emailError = ref<string>("");
-const nameError = ref<string>("");
-const passwordError = ref<string>("");
-const avatarError = ref<string>("");
+const emailError = ref<string>(""),
+  nameError = ref<string>(""),
+  passwordError = ref<string>(""),
+  avatarError = ref<string>("");
 
 const goBack = (): void => {
   router.push("/auth");
@@ -85,11 +85,10 @@ const submitForm = async () => {
     !nameError.value
   ) {
     await signUpUser(name.value, email.value, password.value, avatarFile.value);
-      router.push("/");
+    router.push("/");
   }
 
   isSubmitting.value = false;
-
 };
 </script>
 
@@ -99,8 +98,11 @@ const submitForm = async () => {
       <PreloadSpinner v-if="isSubmitting" class="spinner" />
 
       <h1>{{ t("common.signUpTitle") }}</h1>
-      <form @submit.prevent="submitForm" :aria-disabled="isSubmitting"
-      novalidate>
+      <form
+        @submit.prevent="submitForm"
+        :aria-disabled="isSubmitting"
+        novalidate
+      >
         <div class="input-grup">
           <label :for="nameName">{{ t("labels.nameSign") }}</label>
           <Input
@@ -162,7 +164,9 @@ const submitForm = async () => {
           }}</Button>
         </div>
       </form>
-      <Button @click="goBack" :disabled="isSubmitting">{{ t("buttons.return") }}</Button>
+      <Button @click="goBack" :disabled="isSubmitting">{{
+        t("buttons.return")
+      }}</Button>
     </div>
   </section>
 </template>

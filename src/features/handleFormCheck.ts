@@ -16,7 +16,7 @@ export const isPassvordLengthValid = (
   first: string,
   second?: string
 ): boolean => {
-  if(!second) return first.length > 5; 
+  if (!second) return first.length > 5;
   return first.length === second.length && first.length > 5;
 };
 
