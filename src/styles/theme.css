@@ -67,6 +67,7 @@ html.light-theme {
   --color-on-surface: #0c1214;
   --color-on-surface-variant: #2f383a;
   --color-surface-bright: #f5fafc;
+  --color-surface-container: #d8e0e1;
 
   --color-inverse-surface: #2c3133;
   --color-inverse-on-surface: #ecf2f4;

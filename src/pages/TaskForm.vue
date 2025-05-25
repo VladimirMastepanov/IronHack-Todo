@@ -8,6 +8,8 @@ import { useUser } from "../store/user";
 import { storeToRefs } from "pinia";
 import { useI18n } from "vue-i18n";
 import ArrowBackIcon from '../assets/arrow_back.svg';
+import Select from "../shared/Select.vue";
+import type { ImportanceType } from "../types/types";
 
 const router = useRouter();
 const tasksStore = useTasks();
@@ -17,7 +19,7 @@ const { insertTaskToDb } = tasksStore;
 const { t } = useI18n();
 
 const taskText = ref<string>(""),
-  taskImpartance = ref<1 | 2 | 3>(1),
+  taskImpartance = ref<ImportanceType>(3),
   taskInputName = "",
   taskInputLabel = t("labels.new"),
   taskInputId = "add-task-form",
@@ -62,11 +64,7 @@ const saveChanges = async () => {
         <p class="error">{{ taskErrorMessage || "\u00A0" }}</p>
         <div class="task-form-row controls">
           <label>{{ t("labels.importance") }}</label>
-          <select v-model.number="taskImpartance" :disabled="isSubmitting">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-          </select>
+          <Select v-model="taskImpartance" :option="taskImpartance" />
         </div>
 
         <div class="task-form-row buttons">

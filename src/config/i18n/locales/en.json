@@ -31,7 +31,9 @@
     "color": "Task color",
     "importance": "Task importance",
     "new": "Enter task description",
-    "search": "Search tasks"
+    "search": "Search tasks",
+    "close": "Close",
+    "confirmation": "You are sure?"
   },
   "common": {
     "avatarAlt": "User profile avatar",

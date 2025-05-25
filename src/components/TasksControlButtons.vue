@@ -11,12 +11,12 @@ const { t } = useI18n();
 const router = useRouter();
 const { sortByText, sortByStatus, sortByImportance } = useSort();
 
-const buttonAddBackground = "var(--color-on-tertiary)";
-const buttonAddColor = "var(--color-tertiary)";
+const buttonAddBackground = "var(--color-on-secondary)";
+const buttonAddColor = "var(--color-secondary)";
 const buttonAddRipple = "var(--color-error)";
 
-const buttonControlBackground = "var(--color-inverse-tertiary)";
-const buttonControlColor = "var(--color-tertiary)";
+const buttonControlBackground = "var(--color-on-primary)";
+const buttonControlColor = "var(--color-primary)";
 const buttonControlRipple = "var(--color-error)";
 
 const toAddTask = () => {

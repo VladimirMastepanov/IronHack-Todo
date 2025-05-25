@@ -31,7 +31,9 @@
     "color": "Color de la tarea",
     "importance": "Importancia de la tarea",
     "new": "Escribe la descripción de la tarea",
-    "search": "Buscar tareas"
+    "search": "Buscar tareas",
+    "close": "Serar",
+    "confirmation": "¿Estas seguro?"
   },
   "common": {
     "avatarAlt": "Avatar del perfil de usuario",
@@ -52,7 +54,7 @@
     "avatarInvalidType": "El avatar debe ser un archivo JPG, PNG o WebP.",
     "emptyError": "Olvidaste ingresar una tarea"
   },
-   "importance": {
+  "importance": {
     "1": "Baja",
     "2": "Media",
     "3": "Alta"

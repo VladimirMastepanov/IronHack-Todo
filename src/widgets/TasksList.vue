@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { type EditedTaskDescription, type ImportanceType } from "../types/types";
+import {
+  type EditedTaskDescription,
+  type ImportanceType,
+} from "../types/types";
 import Button from "../shared/Button.vue";
 import Textarea from "../shared/Textarea.vue";
 import { useTasks } from "../store/task";
@@ -18,6 +21,7 @@ import { useSearch } from "../store/search";
 import { getFiltredTasks } from "../features/getFiltredTasks";
 import { getSortedTasks } from "../features/getSortedTasks";
 import Select from "../shared/Select.vue";
+import Modal from "../shared/Modal.vue";
 
 const searchStore = useSearch();
 const sortStore = useSort();
@@ -42,13 +46,15 @@ const tasksForDisplay = computed(() => {
 
 const { t } = useI18n();
 
+const isModalOpen = ref<boolean>(false);
+const taskIdForRemove = ref<number | null>(null);
+
 const taskText = ref<string>(""),
   taskImpartance = ref<ImportanceType>(1),
   taskInputName = "",
   taskInputLabel = t("labels.new"),
   isSubmitting = ref<boolean>(false),
   taskErrorMessage = ref<string>("");
-
 
 const originalTask = ref<EditedTaskDescription | null>(null);
 const getTaskInputId = (id: number): string => `task-input-${id}`;
@@ -70,6 +76,7 @@ const closeCard = (): void => {
   taskText.value = "";
   taskImpartance.value = 1;
   openedCardId.value = null;
+  taskIdForRemove.value = null;
 };
 
 const saveChanges = async (id: number, text: string, importance: 1 | 2 | 3) => {
@@ -91,16 +98,20 @@ const cancelChanges = (): void => {
   }
 };
 
-const deleteTask = async (taskId: number) => {
-  taskErrorMessage.value = "";
-  if (taskText.value.length === 0) {
-    taskErrorMessage.value = t("errors.emptyError");
-  } else {
-    isSubmitting.value = true;
-    await removeTaskFromDb(taskId);
-    closeCard();
-    isSubmitting.value = false;
+const onDeleteCkick = (id: number) => {
+  taskIdForRemove.value = id;
+  isModalOpen.value = true;
+};
+
+const deleteTask = async () => {
+  isSubmitting.value = true;
+  if (taskIdForRemove.value) {
+    await removeTaskFromDb(taskIdForRemove.value);
   }
+  taskIdForRemove.value = null;
+  isSubmitting.value = false;
+  isModalOpen.value = false;
+  closeCard();
 };
 </script>
 
@@ -115,20 +126,20 @@ const deleteTask = async (taskId: number) => {
                 <ArrowDownSvg
                   @click="openCard(task.id)"
                   class="svg"
-                  fill="var(--color-on-secondary)"
+                  fill="var(--color-on-surface)"
                 />
                 <p>{{ task.text }}</p>
                 <CheckDoneIcon
                   :key="`done-${task.id}`"
                   @click="toggleTaskIsDone(task.id, task.isDone)"
-                  fill="var(--color-on-secondary)"
+                  fill="var(--color-on-surface)"
                   class="svg"
                   v-if="task.isDone"
                 />
                 <CheckOutlineIcon
                   :key="`outline-${task.id}`"
                   @click="toggleTaskIsDone(task.id, task.isDone)"
-                  fill="var(--color-on-secondary)"
+                  fill="var(--color-on-surface)"
                   class="svg"
                   v-else
                 />
@@ -152,12 +163,10 @@ const deleteTask = async (taskId: number) => {
 
                   <div class="task-form-row settings">
                     <label>{{ t("labels.importance") }}</label>
-                    <Select v-model="taskImpartance" :option="task.importance"/>
-                    <!-- <select v-model.number="taskImpartance">
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                    </select> -->
+                    <Select
+                      v-model="taskImpartance"
+                      :option="task.importance"
+                    />
                   </div>
 
                   <div class="task-form-row controls">
@@ -166,13 +175,13 @@ const deleteTask = async (taskId: number) => {
                         <ArrowUpSvg
                           @click="closeCard()"
                           class="svg"
-                          fill="var(--color-on-secondary)"
+                          fill="var(--color-on-surface)"
                         />
                       </div>
 
                       <Button
                         :disabled="isSubmitting"
-                        @click="deleteTask(task.id)"
+                        @click="onDeleteCkick(task.id)"
                       >
                         <DeleteIcon
                           fill="var(--color-on-secondary)"
@@ -199,6 +208,15 @@ const deleteTask = async (taskId: number) => {
         </li>
       </ul>
     </div>
+    <Modal v-model="isModalOpen">
+      <div class="modal-content">
+              <h4>{{t('labels.confirmation')}}</h4>
+      <Button :disabled="isSubmitting" @click="deleteTask">
+        <DeleteIcon fill="var(--color-on-secondary)" class="delete-icon"
+      /></Button>
+
+      </div>
+    </Modal>
   </section>
 </template>
 
@@ -268,7 +286,7 @@ const deleteTask = async (taskId: number) => {
 }
 .tasks-list {
   border-radius: var(--radius-md);
-  background-color: var(--color-tertiary);
+  /* background-color: var(--color-tertiary-container); */
   box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
 }
 ul {
@@ -288,9 +306,10 @@ ul {
   align-items: center;
   gap: var(--space-sm);
   border-radius: var(--radius-md);
-  background-color: var(--color-tertiary);
+  background-color: var(--color-surface-container);
   box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
-  border: 1px solid var(--color-outline);
+  border: 1px solid var(--color-surface-bright);
+  color: var(--color-on-surface)
 }
 .left-group {
   display: flex;
@@ -310,5 +329,12 @@ ul {
 select {
   position: relative;
   font: inherit;
+}
+
+.modal-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-lg)
 }
 </style>
