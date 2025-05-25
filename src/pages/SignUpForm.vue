@@ -113,7 +113,7 @@ const submitForm = async () => {
             :type="nameType"
             :disabled="isSubmitting"
           />
-          <p class="error">{{ nameError }}</p>
+          <p class="error">{{ nameError || "\u00A0" }}</p>
         </div>
         <div class="input-grup">
           <label :for="emailName">{{ t("labels.emailSign") }}</label>
@@ -125,7 +125,7 @@ const submitForm = async () => {
             :type="emailType"
             :disabled="isSubmitting"
           />
-          <p class="error">{{ emailError }}</p>
+          <p class="error">{{ emailError || "\u00A0"  }}</p>
         </div>
         <div class="input-grup">
           <label :for="passwordName">{{ t("labels.passwordSign") }}</label>
@@ -137,7 +137,7 @@ const submitForm = async () => {
             :type="passwordType"
             :disabled="isSubmitting"
           />
-          <p class="error">{{ passwordError }}</p>
+          <p class="error">{{ passwordError || "\u00A0"  }}</p>
         </div>
         <div class="input-grup">
           <label :for="passwordConf">{{ t("labels.passwordConfirm") }}</label>
@@ -149,22 +149,22 @@ const submitForm = async () => {
             :type="passwordType"
             :disabled="isSubmitting"
           />
-          <p class="error">{{ passwordError }}</p>
+          <p class="error">{{ passwordError || "\u00A0"  }}</p>
         </div>
         <div class="input-grup">
           <AvatarDropArea
             @upload-avatar="handleAvatarSelect"
             :disabled="isSubmitting"
           />
-          <p class="error">{{ avatarError }}</p>
+          <p class="error">{{ avatarError || "\u00A0"  }}</p>
         </div>
-        <div>
+        <div class="submit">
           <Button type="submit" :disabled="isSubmitting">{{
             t("buttons.submitSign")
           }}</Button>
         </div>
       </form>
-      <Button @click="goBack" :disabled="isSubmitting">{{
+      <Button class="go-back" @click="goBack" :disabled="isSubmitting">{{
         t("buttons.return")
       }}</Button>
     </div>
@@ -174,6 +174,21 @@ const submitForm = async () => {
 <style scoped>
 .form-container {
   position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.submit {
+  display: flex;
+  justify-content: end;
+}
+.go-back {
+  position: absolute;
+  bottom: 0;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
 }
 .spinner {
   position: absolute;

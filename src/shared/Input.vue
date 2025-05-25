@@ -47,10 +47,10 @@ input {
   all: unset;
   padding: var(--space-xs) var(--space-xs) var(--space-xs) var(--space-md);
   text-align: left;
-  background-color: var(--color-tertiary);
-  border: 1px var(--color-outline) solid;
+  background-color: var(--color-inverse-on-surface);
+  border: 1px var(--color-secondary-container) solid;
   border-radius: var(--radius-lg);
-  color: var(--color-on-tertiary);
+  color: var(--color-on-surface);
   font-size: var(--font-size-md);
 }
 </style>

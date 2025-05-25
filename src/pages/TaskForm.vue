@@ -138,6 +138,7 @@ const saveChanges = async () => {
 }
 
 .list-element-container {
+  color: var(--color-secondary);
   display: flex;
   padding: var(--space-md) var(--space-sm) var(--space-md) var(--space-sm);
   flex-direction: row;
@@ -145,8 +146,8 @@ const saveChanges = async () => {
   align-items: center;
   gap: var(--space-sm);
   border-radius: var(--radius-md);
-  background-color: var(--color-surface);
+  background-color: var(--color-surface-container);
   box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
-  border: 1px solid var(--color-outline);
+  border: 1px solid var(--color-surface-bright);
 }
 </style>

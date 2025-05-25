@@ -42,10 +42,10 @@ textarea {
   resize: none;
   text-align: left;
   padding: var(--space-sm);
-  background-color: var(--color-tertiary);
-  border: 1px var(--color-outline) solid;
+  background-color: var(--color-inverse-on-surface);
+  border: 1px solid var(--color-surface-bright);
   border-radius: var(--radius-sm);
-  color: var(--color-on-tertiary);
+  color: var(--color-inverse-surface);
   font-size: var(--font-size-md);
   width: 100%;
 }

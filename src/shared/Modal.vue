@@ -27,7 +27,7 @@ const closeModal = (): void => {
       >
         <div class="modal-content">
           <button class="close-button" @click="closeModal" :aria-label="t('labels.close')">
-            <CloseIcon fill="var(--color-on-secondary)" class="svg" />
+            <CloseIcon fill="var(--color-secondary)" class="svg" />
           </button>
 
           <slot />
@@ -78,6 +78,7 @@ button {
   max-width: 90vw;
   padding: var(--space-sm);
   border-radius: var(--radius-sm);
-  background-color: var(--color-tertiary);
+  background-color: var(--color-surface-bright);
+  color: var(--color-error-container);
 }
 </style>

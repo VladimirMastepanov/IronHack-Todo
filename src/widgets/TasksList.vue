@@ -22,7 +22,10 @@ import { getFiltredTasks } from "../features/getFiltredTasks";
 import { getSortedTasks } from "../features/getSortedTasks";
 import Select from "../shared/Select.vue";
 import Modal from "../shared/Modal.vue";
+import { COLOR_OPTIONS } from "../constants";
 
+//TODO ошибка сохранения при отсутствии текста задачи
+//отмены изменения важности
 const searchStore = useSearch();
 const sortStore = useSort();
 const { sortBy } = storeToRefs(sortStore);
@@ -79,7 +82,7 @@ const closeCard = (): void => {
   taskIdForRemove.value = null;
 };
 
-const saveChanges = async (id: number, text: string, importance: 1 | 2 | 3) => {
+const saveChanges = async (id: number, text: string, importance: ImportanceType) => {
   taskErrorMessage.value = "";
   if (taskText.value.length === 0) {
     taskErrorMessage.value = t("errors.emptyError");
@@ -126,7 +129,7 @@ const deleteTask = async () => {
                 <ArrowDownSvg
                   @click="openCard(task.id)"
                   class="svg"
-                  fill="var(--color-on-surface)"
+                  :fill="COLOR_OPTIONS[task.importance]"
                 />
                 <p>{{ task.text }}</p>
                 <CheckDoneIcon
@@ -160,7 +163,9 @@ const deleteTask = async () => {
                       :disabled="isSubmitting"
                     />
                   </div>
-
+                  <div class="error-container">
+                    <p class="error">{{ taskErrorMessage || "\u00A0" }}</p>
+                  </div>
                   <div class="task-form-row settings">
                     <label>{{ t("labels.importance") }}</label>
                     <Select
@@ -210,11 +215,10 @@ const deleteTask = async () => {
     </div>
     <Modal v-model="isModalOpen">
       <div class="modal-content">
-              <h4>{{t('labels.confirmation')}}</h4>
-      <Button :disabled="isSubmitting" @click="deleteTask">
-        <DeleteIcon fill="var(--color-on-secondary)" class="delete-icon"
-      /></Button>
-
+        <h4>{{ t("labels.confirmation") }}</h4>
+        <Button :disabled="isSubmitting" @click="deleteTask">
+          <DeleteIcon fill="var(--color-on-secondary)" class="delete-icon"
+        /></Button>
       </div>
     </Modal>
   </section>
@@ -227,7 +231,7 @@ const deleteTask = async () => {
   align-items: center;
   width: 100%;
   height: 100%;
-  gap: var(--space-sm);
+  gap: var(--space-md);
 }
 .svg {
   padding: 0 var(--space-sm) 0 var(--space-sm);
@@ -235,6 +239,18 @@ const deleteTask = async () => {
   width: 1.4rem;
   display: flex;
   flex-shrink: 0;
+}
+.error {
+  color: var(--color-error-container);
+  font-size: 0.7em;
+  text-align: left;
+  padding: 0 0 0 var(--space-md);
+}
+.error-container {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  width: 100%;
 }
 .delete-icon {
   padding: 0;
@@ -309,7 +325,7 @@ ul {
   background-color: var(--color-surface-container);
   box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
   border: 1px solid var(--color-surface-bright);
-  color: var(--color-on-surface)
+  color: var(--color-on-surface);
 }
 .left-group {
   display: flex;
@@ -335,6 +351,6 @@ select {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-lg)
+  gap: var(--space-lg);
 }
 </style>

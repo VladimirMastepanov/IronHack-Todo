@@ -3,6 +3,7 @@ import ArrowDownSvg from "../assets/arrow_down.svg";
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 import type { ImportanceType, OptionsDescription } from "../types/types";
+import { COLOR_OPTIONS } from "../constants";
 
 const { t } = useI18n();
 const props = defineProps<{
@@ -30,12 +31,6 @@ const options: OptionsDescription[] = [
   },
 ];
 
-const optionColors = {
-  1: "var(--importance-high)",
-  2: "var(--importance-medium)",
-  3: "var(--importance-low)",
-};
-
 const currentOption = ref<ImportanceType>(props.option);
 
 const isOpen = ref<boolean>(false);
@@ -55,7 +50,7 @@ const selectOption = (option: ImportanceType) => {
   <section>
     <div
       class="select"
-      :style="{ backgroundColor: optionColors[currentOption] }"
+      :style="{ backgroundColor: COLOR_OPTIONS[currentOption] }"
     >
       <ArrowDownSvg class="svg" @click.stop="toggleOpen" />
       <ul v-show="isOpen" class="select-list">

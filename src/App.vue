@@ -15,6 +15,7 @@ import Header from "./widgets/Header.vue";
 <style scoped>
 .layout {
   display: flex;
+  gap: var(--space-md);
   flex-direction: column;
   min-height: 100vh
 }
