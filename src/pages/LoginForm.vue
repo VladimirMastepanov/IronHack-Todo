@@ -26,6 +26,7 @@ const email = ref<string>(""),
   password = ref<string>("");
 
 const isSubmitting = ref<boolean>(false);
+const shouldBeFocused = ref<boolean>(true);
 
 const emailError = ref<string>(""),
   passwordError = ref<string>("");
@@ -70,6 +71,7 @@ const submitForm = async () => {
         <div>
           <label :for="emailName">{{ t("labels.emailLogin") }}</label>
           <Input
+            :focus="shouldBeFocused"
             v-model:model-value="email"
             :name="emailName"
             :id="emailName"

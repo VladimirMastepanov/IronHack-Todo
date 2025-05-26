@@ -21,6 +21,8 @@ const emailName = "email",
 const email = ref(""),
   password = ref("");
 
+  const shouldBeFocused = ref<boolean>(true);
+
 const goBack = () => {
   router.push("/auth");
 };
@@ -41,6 +43,7 @@ const submitForm = () => {};
         <div>
           <label :for="emailInputId">{{ t("lables.emailLogin") }}</label>
           <Input
+          :focus="shouldBeFocused"
             v-model:model-value="email"
             :name="emailName"
             :placeholder="emailPlaceholder"

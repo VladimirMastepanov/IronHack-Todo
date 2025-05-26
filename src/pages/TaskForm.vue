@@ -26,6 +26,8 @@ const taskText = ref<string>(""),
   taskErrorMessage = ref<string>(""),
   isSubmitting = ref<boolean>(false);
 
+  const shouldBeFocused = ref<boolean>(true);
+
 const closeForm = (): void => {
   router.push("/");
 };
@@ -54,6 +56,7 @@ const saveChanges = async () => {
             taskInputLabel
           }}</label>
           <Textarea
+          :focus="shouldBeFocused"
             class="textarea"
             v-model="taskText"
             :name="taskInputName"

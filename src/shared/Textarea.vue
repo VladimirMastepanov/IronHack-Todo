@@ -5,6 +5,7 @@ const props = defineProps<{
   modelValue: string;
   name: string;
   id: string;
+  focus?: boolean;
   errorMessage?: string;
   hasError?: string;
 }>();
@@ -25,6 +26,7 @@ const onInput = (event: Event) => {
 <template>
   <section>
     <textarea
+      v-focus="props.focus"
       :value="props.modelValue"
       type="text"
       :id="id"

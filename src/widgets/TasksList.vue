@@ -59,6 +59,8 @@ const taskText = ref<string>(""),
   isSubmitting = ref<boolean>(false),
   taskErrorMessage = ref<string>("");
 
+  const shouldBeFocused = ref<boolean>(true);
+
 const originalTask = ref<EditedTaskDescription | null>(null);
 const getTaskInputId = (id: number): string => `task-input-${id}`;
 
@@ -156,6 +158,7 @@ const deleteTask = async () => {
                       >{{ taskInputLabel }}</label
                     >
                     <Textarea
+                    :focus="shouldBeFocused"
                       class="textarea"
                       v-model="taskText"
                       :name="taskInputName"

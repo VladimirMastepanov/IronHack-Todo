@@ -7,6 +7,7 @@ const props = defineProps<{
   modelValue: string;
   name: string;
   id: string;
+  focus?: boolean;
   errorMessage?: string;
   hasError?: string;
 }>();
@@ -27,6 +28,7 @@ const onInput = (event: Event) => {
 <template>
   <section class="search-form">
     <input
+      v-focus="props.focus"
       :value="props.modelValue"
       :type="type"
       :id="id"

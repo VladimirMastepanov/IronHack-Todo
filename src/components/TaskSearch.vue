@@ -23,6 +23,7 @@ const onSearch = () => {
     <div class="search-form" role="search">
       <label :for="searchName" class="lable-hidden">{{ searchLabele }}</label>
       <Input
+        :focus="true"
         v-model:model-value="searchTerm"
         :name="searchName"
         :id="searchName"

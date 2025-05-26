@@ -44,6 +44,8 @@ const emailError = ref<string>(""),
   passwordError = ref<string>(""),
   avatarError = ref<string>("");
 
+  const shouldBeFocused = ref<boolean>(true);
+
 const goBack = (): void => {
   router.push("/auth");
 };
@@ -106,6 +108,7 @@ const submitForm = async () => {
         <div class="input-grup">
           <label :for="nameName">{{ t("labels.nameSign") }}</label>
           <Input
+          :focus="shouldBeFocused"
             v-model:model-value="name"
             :name="nameName"
             :id="nameName"
