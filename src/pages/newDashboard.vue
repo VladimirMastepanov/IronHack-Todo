@@ -10,6 +10,7 @@ import TaskControls from "../widgets/TaskControls.vue";
   </section>
 </template>
 
+
 <style scoped>
 section {
   display: flex;
@@ -18,3 +19,4 @@ section {
 }
 
 </style>
+
