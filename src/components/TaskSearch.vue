@@ -13,6 +13,8 @@ const searchTerm = ref<string>(""),
   searchPlaceholder = "placeholders.searchTasks",
   searchLabele = t("labels.search");
 
+  const shouldBeFocused = ref<boolean>(true);
+
 const onSearch = () => {
   setSearchTerm(searchTerm.value.trim().toLowerCase());
 };
@@ -23,7 +25,7 @@ const onSearch = () => {
     <div class="search-form" role="search">
       <label :for="searchName" class="lable-hidden">{{ searchLabele }}</label>
       <Input
-        :focus="true"
+        :focus="shouldBeFocused"
         v-model:model-value="searchTerm"
         :name="searchName"
         :id="searchName"

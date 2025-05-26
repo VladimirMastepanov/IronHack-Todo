@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+//TODO
+</script>
 
 <template>
   <section>Page Not Found</section>

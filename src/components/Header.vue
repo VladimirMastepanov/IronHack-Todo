@@ -2,21 +2,19 @@
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 import Button from "../shared/Button.vue";
-import LangSwitcher from "../components/LangSwitcher.vue";
-import ThemeSwitcher from "../components/ThemeSwitcher.vue";
+import LangSwitcher from "./LangSwitcher.vue";
+import ThemeSwitcher from "./ThemeSwitcher.vue";
 import { ref } from "vue";
 import { useUser } from "../store/user";
 import DefaultAvatar from "../assets/account_circle.svg";
 import { storeToRefs } from "pinia";
-import { computed } from "vue";
-//TODO check display default avatar
+
 const { t } = useI18n();
 const router = useRouter();
 const userStore = useUser();
 const { isAuth, user } = storeToRefs(userStore);
 const { logOutUser } = userStore;
 const isSubmitting = ref<boolean>(false);
-const avataeUrl = computed(() => user.value?.image || DefaultAvatar);
 
 const logout = async (): Promise<void> => {
   try {
@@ -34,8 +32,14 @@ const logout = async (): Promise<void> => {
 <template>
   <section>
     <header>
-      <img :src="avataeUrl" :alt="t('common.avatarAlt')" />
 
+      <img
+        v-if="isAuth && user?.image"
+        :src="user.image"
+        :alt="t('common.avatarAlt')"
+      />
+      <DefaultAvatar class="svg" v-else :alt="t('common.avatarAlt')" />
+      
       <div class="header-buttons">
         <ThemeSwitcher />
         <LangSwitcher />
@@ -75,6 +79,12 @@ img {
   height: auto;
   border-radius: var(--radius-round);
   object-fit: cover;
+}
+.svg {
+  padding: 0;
+  width: 4rem;
+  height: auto;
+  display: flex;
 }
 p {
   font-weight: var(--font-weight-light);

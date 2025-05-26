@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import TasksList from "../widgets/TasksList.vue";
-import TaskControls from "../widgets/TaskControls.vue";
+import TasksList from "../components/TasksList.vue";
+import TaskControls from "../components/TaskControls.vue";
 </script>
 
 <template>

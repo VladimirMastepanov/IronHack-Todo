@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import TasksControlButtons from "../components/TasksControlButtons.vue";
+import TasksControlButtons from "./TasksControlButtons.vue";
 
-import TaskSearch from "../components/TaskSearch.vue";
+import TaskSearch from "./TaskSearch.vue";
 </script>
 
 <template>
