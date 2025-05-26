@@ -24,7 +24,7 @@ import Select from "../shared/Select.vue";
 import Modal from "../shared/Modal.vue";
 import { COLOR_OPTIONS } from "../constants";
 
-//TODO ошибка сохранения при отсутствии текста задачи
+//TODO 
 //отмены изменения важности
 const searchStore = useSearch();
 const sortStore = useSort();

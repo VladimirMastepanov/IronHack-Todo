@@ -10,7 +10,8 @@ const router = useRouter();
 
 const emailName = "email",
   emailPlaceholder = "placeholders.email",
-  emailType = "email";
+  emailType = "email",
+  emailConfirmationInputId = 'email-confirmation-input';
 
 const email = ref("");
 
@@ -27,12 +28,13 @@ const submitForm = () => {};
       <h1>{{ t("common.loginTitle") }}</h1>
       <form @submit.prevent="submitForm">
         <div>
-          <label :for="emailName">{{ t("lables.emailLogin") }}</label>
+          <label :for="emailConfirmationInputId">{{ t("lables.emailLogin") }}</label>
           <Input
             v-model:model-value="email"
             :name="emailName"
             :placeholder="emailPlaceholder"
             :type="emailType"
+            :id="emailConfirmationInputId"
           />
           <p>{{ email }}</p>
         </div>

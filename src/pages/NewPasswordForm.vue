@@ -13,7 +13,10 @@ const emailName = "email",
   emailPlaceholder = "placeholders.email",
   passwordPlaceholder = "placeholders.password",
   emailType = "email",
-  passwordType = "password";
+  passwordType = "password",
+  emailInputId = 'emailconfirmation',
+  newPasswordInputId = 'new-password';
+
 
 const email = ref(""),
   password = ref("");
@@ -36,22 +39,24 @@ const submitForm = () => {};
       <h1>{{ t("common.loginTitle") }}</h1>
       <form @submit.prevent="submitForm">
         <div>
-          <label :for="emailName">{{ t("lables.emailLogin") }}</label>
+          <label :for="emailInputId">{{ t("lables.emailLogin") }}</label>
           <Input
             v-model:model-value="email"
             :name="emailName"
             :placeholder="emailPlaceholder"
             :type="emailType"
+            :id="emailInputId"
           />
           <p>{{ email }}</p>
         </div>
         <div>
-          <label :for="passwordName">{{ t("lables.passwordLogin") }}</label>
+          <label :for="newPasswordInputId">{{ t("lables.passwordLogin") }}</label>
           <Input
             v-model:model-value="password"
             :name="passwordName"
             :placeholder="passwordPlaceholder"
             :type="passwordType"
+            :id="newPasswordInputId"
           />
           <p>{{ password }}</p>
         </div>

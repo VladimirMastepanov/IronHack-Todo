@@ -4,12 +4,11 @@ import Header from "./widgets/Header.vue";
 
 <template>
   <div class="layout">
-      <Header />
-  <main>
-    <router-view />
-  </main>
+    <Header />
+    <main>
+      <router-view />
+    </main>
   </div>
-
 </template>
 
 <style scoped>
@@ -17,7 +16,7 @@ import Header from "./widgets/Header.vue";
   display: flex;
   gap: var(--space-md);
   flex-direction: column;
-  min-height: 100vh
+  min-height: 100vh;
 }
 main {
   flex: 1 1 auto;
