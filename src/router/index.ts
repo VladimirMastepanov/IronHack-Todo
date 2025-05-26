@@ -5,7 +5,7 @@ const routes = [
   {
     path: "/",
     name: "Dashboard",
-    component: () => import('../pages/newDashboard.vue'),
+    component: () => import('../pages/Dashboard.vue'),
     meta: { requiresAuth: true },
   },
   {
