@@ -68,7 +68,7 @@ router.beforeEach(async (to) => {
       'Login',
       'Signup',
       'ForgotPassword',
-      'NewPassword',
+      // 'NewPassword',
     ].includes(to.name as string)
   ) {
     return { name: 'Dashboard' }
