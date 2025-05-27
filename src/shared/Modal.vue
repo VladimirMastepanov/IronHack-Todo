@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { useI18n } from "vue-i18n";
-import CloseIcon from "../assets/close.svg";
+import { useI18n } from 'vue-i18n'
+import CloseIcon from '../assets/close.svg'
 
-const { t } = useI18n();
+const { t } = useI18n()
 const props = defineProps<{
-  modelValue: boolean;
-}>();
+  modelValue: boolean
+}>()
 const emit = defineEmits<{
-  (e: "update:modelValue", value: boolean): void;
-}>();
+  (e: 'update:modelValue', value: boolean): void
+}>()
 
 const closeModal = (): void => {
-  emit("update:modelValue", false);
-};
+  emit('update:modelValue', false)
+}
 </script>
 
 <template>
@@ -26,7 +26,11 @@ const closeModal = (): void => {
         class="modal-container"
       >
         <div class="modal-content">
-          <button class="close-button" @click="closeModal" :aria-label="t('labels.close')">
+          <button
+            class="close-button"
+            @click="closeModal"
+            :aria-label="t('labels.close')"
+          >
             <CloseIcon fill="var(--color-secondary)" class="svg" />
           </button>
 

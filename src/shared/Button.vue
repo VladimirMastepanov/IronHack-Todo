@@ -1,15 +1,15 @@
 <script setup lang="ts">
 const props = defineProps<{
-  rippleColor?: string;
-  backgroundColor?: string;
-  color?: string;
-}>();
+  rippleColor?: string
+  backgroundColor?: string
+  color?: string
+}>()
 
 const style = {
-  "--ripple-color": props.rippleColor ?? "var(--color-on-secondary)",
-  "--background-color": props.backgroundColor ?? "var(--color-secondary)",
-  "--color": props.color ?? "var(--color-on-secondary)",
-};
+  '--ripple-color': props.rippleColor ?? 'var(--color-on-secondary)',
+  '--background-color': props.backgroundColor ?? 'var(--color-secondary)',
+  '--color': props.color ?? 'var(--color-on-secondary)',
+}
 </script>
 
 <template>
@@ -34,7 +34,7 @@ button {
 }
 
 button::before {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
   border-radius: inherit;

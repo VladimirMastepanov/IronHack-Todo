@@ -1,49 +1,49 @@
 <script setup lang="ts">
-import ArrowDownSvg from "../assets/arrow_down.svg";
-import { ref } from "vue";
-import { useI18n } from "vue-i18n";
-import type { ImportanceType, OptionsDescription } from "../types/types";
-import { COLOR_OPTIONS } from "../constants";
+import ArrowDownSvg from '../assets/arrow_down.svg'
+import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+import type { ImportanceType, OptionsDescription } from '../types/types'
+import { COLOR_OPTIONS } from '../constants'
 
-const { t } = useI18n();
+const { t } = useI18n()
 const props = defineProps<{
-  modelValue: ImportanceType;
-  option: ImportanceType;
-}>();
+  modelValue: ImportanceType
+  option: ImportanceType
+}>()
 const emit = defineEmits<{
-  (e: "update:modelValue", option: ImportanceType): void;
-}>();
+  (e: 'update:modelValue', option: ImportanceType): void
+}>()
 const options: OptionsDescription[] = [
   {
-    label: "importance.1",
+    label: 'importance.1',
     value: 1,
-    color: "var(--importance-high)",
+    color: 'var(--importance-high)',
   },
   {
-    label: "importance.2",
+    label: 'importance.2',
     value: 2,
-    color: "var(--importance-medium)",
+    color: 'var(--importance-medium)',
   },
   {
-    label: "importance.3",
+    label: 'importance.3',
     value: 3,
-    color: "var(--importance-low)",
+    color: 'var(--importance-low)',
   },
-];
+]
 
-const currentOption = ref<ImportanceType>(props.option);
+const currentOption = ref<ImportanceType>(props.option)
 
-const isOpen = ref<boolean>(false);
+const isOpen = ref<boolean>(false)
 
 const toggleOpen = (): void => {
-  isOpen.value = !isOpen.value;
-};
+  isOpen.value = !isOpen.value
+}
 
 const selectOption = (option: ImportanceType) => {
-  currentOption.value = option;
-  emit("update:modelValue", option);
-  isOpen.value = false;
-};
+  currentOption.value = option
+  emit('update:modelValue', option)
+  isOpen.value = false
+}
 </script>
 
 <template>

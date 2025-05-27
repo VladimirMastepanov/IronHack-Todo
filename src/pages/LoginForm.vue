@@ -1,75 +1,75 @@
 <script setup lang="ts">
-import Button from "../shared/Button.vue";
-import Input from "../shared/Input.vue";
-import { ref } from "vue";
-import { useI18n } from "vue-i18n";
-import { useRouter } from "vue-router";
-import { useUser } from "../store/user";
+import Button from '../shared/Button.vue'
+import Input from '../shared/Input.vue'
+import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
+import { useUser } from '../store/user'
 import {
   isEmailValid,
   isPassvordLengthValid,
-} from "../features/handleFormCheck";
-import PreloadSpinner from "../assets/preload.svg";
+} from '../features/handleFormCheck'
+import PreloadSpinner from '../assets/preload.svg'
 
-const { t } = useI18n();
-const router = useRouter();
-const { loginUser } = useUser();
+const { t } = useI18n()
+const router = useRouter()
+const { loginUser } = useUser()
 
-const emailName = "emailLogin",
-  passwordName = "passwordLogin",
-  emailPlaceholder = "placeholders.email",
-  passwordPlaceholder = "placeholders.password",
-  emailType = "email",
-  passwordType = "password";
+const emailName = 'emailLogin',
+  passwordName = 'passwordLogin',
+  emailPlaceholder = 'placeholders.email',
+  passwordPlaceholder = 'placeholders.password',
+  emailType = 'email',
+  passwordType = 'password'
 
-const email = ref<string>(""),
-  password = ref<string>("");
+const email = ref<string>(''),
+  password = ref<string>('')
 
-const isSubmitting = ref<boolean>(false);
-const shouldBeFocused = ref<boolean>(true);
+const isSubmitting = ref<boolean>(false)
+const shouldBeFocused = ref<boolean>(true)
 
-const emailError = ref<string>(""),
-  passwordError = ref<string>("");
+const emailError = ref<string>(''),
+  passwordError = ref<string>('')
 
 const goBack = (): void => {
-  router.push("/auth");
-};
+  router.push('/auth')
+}
 
 const forgotPassword = (): void => {
-  router.push("/forgotpassword");
-};
+  router.push('/forgotpassword')
+}
 
 const submitForm = async () => {
-  isSubmitting.value = true;
-  emailError.value = "";
-  passwordError.value = "";
+  isSubmitting.value = true
+  emailError.value = ''
+  passwordError.value = ''
 
-  emailError.value = isEmailValid(email.value) ? "" : t("errors.invalidEmail");
+  emailError.value = isEmailValid(email.value) ? '' : t('errors.invalidEmail')
   passwordError.value = isPassvordLengthValid(password.value)
-    ? ""
-    : t("errors.invalidPassword");
+    ? ''
+    : t('errors.invalidPassword')
 
   if (!emailError.value && !passwordError.value) {
-    await loginUser(email.value, password.value);
+    await loginUser(email.value, password.value)
 
-    router.push("/");
+    router.push('/')
   }
-  isSubmitting.value = false;
-};
+  isSubmitting.value = false
+}
 </script>
 
 <template>
   <section>
     <div class="form-container">
       <PreloadSpinner v-if="isSubmitting" class="spinner" />
-      <h1>{{ t("common.loginTitle") }}</h1>
+      <h1>{{ t('common.loginTitle') }}</h1>
       <form
         @submit.prevent="submitForm"
         :aria-disabled="isSubmitting"
         novalidate
-        >
+      >
         <div>
-          <label :for="emailName">{{ t("labels.emailLogin") }}</label>
+          <label :for="emailName">{{ t('labels.emailLogin') }}</label>
           <Input
             :focus="shouldBeFocused"
             v-model:model-value="email"
@@ -79,10 +79,10 @@ const submitForm = async () => {
             :type="emailType"
             :disabled="isSubmitting"
           />
-          <p class="error">{{ emailError || "\u00A0" }}</p>
+          <p class="error">{{ emailError || '\u00A0' }}</p>
         </div>
         <div>
-          <label :for="passwordName">{{ t("labels.passwordLogin") }}</label>
+          <label :for="passwordName">{{ t('labels.passwordLogin') }}</label>
           <Input
             v-model:model-value="password"
             :name="passwordName"
@@ -91,22 +91,22 @@ const submitForm = async () => {
             :type="passwordType"
             :disabled="isSubmitting"
           />
-          <p class="error">{{ passwordError || "\u00A0" }}</p>
-          <button @click="forgotPassword" :disabled="isSubmitting">{{ t("buttons.forgotPassword") }}</button>
+          <p class="error">{{ passwordError || '\u00A0' }}</p>
+          <button @click="forgotPassword" :disabled="isSubmitting">
+            {{ t('buttons.forgotPassword') }}
+          </button>
         </div>
         <div class="send">
           <Button type="submit" :disabled="isSubmitting">{{
-            t("buttons.submitLogin")
+            t('buttons.submitLogin')
           }}</Button>
         </div>
       </form>
       <div class="go-back">
-              <Button @click="goBack" :disabled="isSubmitting">{{
-        t("buttons.return")
-      }}</Button>
+        <Button @click="goBack" :disabled="isSubmitting">{{
+          t('buttons.return')
+        }}</Button>
       </div>
-
-
     </div>
   </section>
 </template>
@@ -126,7 +126,7 @@ const submitForm = async () => {
 form {
   display: flex;
   flex-direction: column;
-  gap: var(--space-md)
+  gap: var(--space-md);
 }
 button {
   background-color: transparent;

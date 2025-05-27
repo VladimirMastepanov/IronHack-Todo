@@ -1,31 +1,31 @@
 <script setup lang="ts">
-import Button from "../shared/Button.vue";
-import { useRouter } from "vue-router";
-import { useI18n } from "vue-i18n";
+import Button from '../shared/Button.vue'
+import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 
-const { t } = useI18n();
-const router = useRouter();
+const { t } = useI18n()
+const router = useRouter()
 
 const navigateToLogin = (): void => {
-  router.push("/login");
-};
+  router.push('/login')
+}
 
 const navigateToSignIn = (): void => {
-  router.push("/signup");
-};
+  router.push('/signup')
+}
 </script>
 
 <template>
   <section>
     <div class="auth-main">
       <div>
-        <p>{{ t("common.haveAccount") }}</p>
-        <Button @click="navigateToLogin">{{ t("buttons.signIn") }}</Button>
+        <p>{{ t('common.haveAccount') }}</p>
+        <Button @click="navigateToLogin">{{ t('buttons.signIn') }}</Button>
       </div>
 
       <div>
-        <p>{{ t("common.firstTime") }}</p>
-        <Button @click="navigateToSignIn">{{ t("buttons.signUp") }}</Button>
+        <p>{{ t('common.firstTime') }}</p>
+        <Button @click="navigateToSignIn">{{ t('buttons.signUp') }}</Button>
       </div>
     </div>
   </section>

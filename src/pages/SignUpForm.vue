@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import Button from "../shared/Button.vue";
-import Input from "../shared/Input.vue";
-import { ref } from "vue";
-import { useI18n } from "vue-i18n";
-import { useRouter } from "vue-router";
-import AvatarDropArea from "../components/AvatarDropArea.vue";
-import { useUser } from "../store/user";
-import PreloadSpinner from "../assets/preload.svg";
+import Button from '../shared/Button.vue'
+import Input from '../shared/Input.vue'
+import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
+import AvatarDropArea from '../components/AvatarDropArea.vue'
+import { useUser } from '../store/user'
+import PreloadSpinner from '../assets/preload.svg'
 import {
   isAvatarSizeValid,
   isAvatarTypeValid,
@@ -14,69 +14,69 @@ import {
   isNameValid,
   isPassvordLengthValid,
   isPasswordMarch,
-} from "../features/handleFormCheck";
+} from '../features/handleFormCheck'
 //TODO оповестить при authError
-const { t } = useI18n();
-const router = useRouter();
-const { signUpUser } = useUser();
+const { t } = useI18n()
+const router = useRouter()
+const { signUpUser } = useUser()
 
-const emailName = "email",
-  passwordName = "password",
-  passwordConfigName = "passwordConfig",
-  emailPlaceholder = "placeholders.email",
-  passwordPlaceholder = "placeholders.password",
-  emailType = "email",
-  passwordType = "password",
-  nameName = "name",
-  namePlaceholder = "placeholders.name",
-  nameType = "text";
+const emailName = 'email',
+  passwordName = 'password',
+  passwordConfigName = 'passwordConfig',
+  emailPlaceholder = 'placeholders.email',
+  passwordPlaceholder = 'placeholders.password',
+  emailType = 'email',
+  passwordType = 'password',
+  nameName = 'name',
+  namePlaceholder = 'placeholders.name',
+  nameType = 'text'
 
-const email = ref<string>(""),
-  name = ref<string>(""),
-  password = ref<string>(""),
-  passwordConf = ref<string>(""),
-  avatarFile = ref<File | null>(null);
+const email = ref<string>(''),
+  name = ref<string>(''),
+  password = ref<string>(''),
+  passwordConf = ref<string>(''),
+  avatarFile = ref<File | null>(null)
 
-const isSubmitting = ref<boolean>(false);
+const isSubmitting = ref<boolean>(false)
 
-const emailError = ref<string>(""),
-  nameError = ref<string>(""),
-  passwordError = ref<string>(""),
-  avatarError = ref<string>("");
+const emailError = ref<string>(''),
+  nameError = ref<string>(''),
+  passwordError = ref<string>(''),
+  avatarError = ref<string>('')
 
-  const shouldBeFocused = ref<boolean>(true);
+const shouldBeFocused = ref<boolean>(true)
 
 const goBack = (): void => {
-  router.push("/auth");
-};
+  router.push('/auth')
+}
 
 const handleAvatarSelect = (file: File): void => {
-  avatarFile.value = file;
-};
+  avatarFile.value = file
+}
 
 const submitForm = async () => {
-  isSubmitting.value = true;
-  emailError.value = "";
-  passwordError.value = "";
-  nameError.value = "";
-  avatarError.value = "";
+  isSubmitting.value = true
+  emailError.value = ''
+  passwordError.value = ''
+  nameError.value = ''
+  avatarError.value = ''
 
   passwordError.value = isPasswordMarch(password.value, passwordConf.value)
-    ? ""
-    : t("errors.passwordsDontMatch");
+    ? ''
+    : t('errors.passwordsDontMatch')
   passwordError.value = isPassvordLengthValid(
     password.value,
     passwordConf.value
   )
-    ? ""
-    : t("errors.invalidPassword");
-  emailError.value = isEmailValid(email.value) ? "" : t("errors.invalidEmail");
-  nameError.value = isNameValid(name.value) ? "" : t("errors.invalidName");
+    ? ''
+    : t('errors.invalidPassword')
+  emailError.value = isEmailValid(email.value) ? '' : t('errors.invalidEmail')
+  nameError.value = isNameValid(name.value) ? '' : t('errors.invalidName')
   if (avatarFile.value) {
     if (!isAvatarSizeValid(avatarFile.value)) {
-      avatarError.value = t("errors.avatarTooLarge");
+      avatarError.value = t('errors.avatarTooLarge')
     } else if (!isAvatarTypeValid(avatarFile.value)) {
-      avatarError.value = t("errors.avatarInvalidType");
+      avatarError.value = t('errors.avatarInvalidType')
     }
   }
 
@@ -86,12 +86,12 @@ const submitForm = async () => {
     !emailError.value &&
     !nameError.value
   ) {
-    await signUpUser(name.value, email.value, password.value, avatarFile.value);
-    router.push("/");
+    await signUpUser(name.value, email.value, password.value, avatarFile.value)
+    router.push('/taskform')
   }
 
-  isSubmitting.value = false;
-};
+  isSubmitting.value = false
+}
 </script>
 
 <template>
@@ -99,16 +99,16 @@ const submitForm = async () => {
     <div class="form-container">
       <PreloadSpinner v-if="isSubmitting" class="spinner" />
 
-      <h1>{{ t("common.signUpTitle") }}</h1>
+      <h1>{{ t('common.signUpTitle') }}</h1>
       <form
         @submit.prevent="submitForm"
         :aria-disabled="isSubmitting"
         novalidate
       >
         <div class="input-grup">
-          <label :for="nameName">{{ t("labels.nameSign") }}</label>
+          <label :for="nameName">{{ t('labels.nameSign') }}</label>
           <Input
-          :focus="shouldBeFocused"
+            :focus="shouldBeFocused"
             v-model:model-value="name"
             :name="nameName"
             :id="nameName"
@@ -116,10 +116,10 @@ const submitForm = async () => {
             :type="nameType"
             :disabled="isSubmitting"
           />
-          <p class="error">{{ nameError || "\u00A0" }}</p>
+          <p class="error">{{ nameError || '\u00A0' }}</p>
         </div>
         <div class="input-grup">
-          <label :for="emailName">{{ t("labels.emailSign") }}</label>
+          <label :for="emailName">{{ t('labels.emailSign') }}</label>
           <Input
             v-model:model-value="email"
             :name="emailName"
@@ -128,10 +128,10 @@ const submitForm = async () => {
             :type="emailType"
             :disabled="isSubmitting"
           />
-          <p class="error">{{ emailError || "\u00A0"  }}</p>
+          <p class="error">{{ emailError || '\u00A0' }}</p>
         </div>
         <div class="input-grup">
-          <label :for="passwordName">{{ t("labels.passwordSign") }}</label>
+          <label :for="passwordName">{{ t('labels.passwordSign') }}</label>
           <Input
             v-model:model-value="password"
             :name="passwordName"
@@ -140,10 +140,10 @@ const submitForm = async () => {
             :type="passwordType"
             :disabled="isSubmitting"
           />
-          <p class="error">{{ passwordError || "\u00A0"  }}</p>
+          <p class="error">{{ passwordError || '\u00A0' }}</p>
         </div>
         <div class="input-grup">
-          <label :for="passwordConf">{{ t("labels.passwordConfirm") }}</label>
+          <label :for="passwordConf">{{ t('labels.passwordConfirm') }}</label>
           <Input
             v-model:model-value="passwordConf"
             :name="passwordConfigName"
@@ -152,23 +152,23 @@ const submitForm = async () => {
             :type="passwordType"
             :disabled="isSubmitting"
           />
-          <p class="error">{{ passwordError || "\u00A0"  }}</p>
+          <p class="error">{{ passwordError || '\u00A0' }}</p>
         </div>
         <div class="input-grup">
           <AvatarDropArea
             @upload-avatar="handleAvatarSelect"
             :disabled="isSubmitting"
           />
-          <p class="error">{{ avatarError || "\u00A0"  }}</p>
+          <p class="error">{{ avatarError || '\u00A0' }}</p>
         </div>
         <div class="submit">
           <Button type="submit" :disabled="isSubmitting">{{
-            t("buttons.submitSign")
+            t('buttons.submitSign')
           }}</Button>
         </div>
       </form>
       <Button class="go-back" @click="goBack" :disabled="isSubmitting">{{
-        t("buttons.return")
+        t('buttons.return')
       }}</Button>
     </div>
   </section>

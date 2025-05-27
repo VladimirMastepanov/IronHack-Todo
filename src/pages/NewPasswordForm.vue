@@ -1,49 +1,48 @@
 <script setup lang="ts">
-import Button from "../shared/Button.vue";
-import Input from "../shared/Input.vue";
-import { ref } from "vue";
-import { useI18n } from "vue-i18n";
-import { useRouter } from "vue-router";
+import Button from '../shared/Button.vue'
+import Input from '../shared/Input.vue'
+import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
 
-const { t } = useI18n();
-const router = useRouter();
+const { t } = useI18n()
+const router = useRouter()
 
-const emailName = "email",
-  passwordName = "password",
-  emailPlaceholder = "placeholders.email",
-  passwordPlaceholder = "placeholders.password",
-  emailType = "email",
-  passwordType = "password",
+const emailName = 'email',
+  passwordName = 'password',
+  emailPlaceholder = 'placeholders.email',
+  passwordPlaceholder = 'placeholders.password',
+  emailType = 'email',
+  passwordType = 'password',
   emailInputId = 'emailconfirmation',
-  newPasswordInputId = 'new-password';
+  newPasswordInputId = 'new-password'
 
+const email = ref(''),
+  password = ref('')
 
-const email = ref(""),
-  password = ref("");
-
-  const shouldBeFocused = ref<boolean>(true);
+const shouldBeFocused = ref<boolean>(true)
 
 const goBack = () => {
-  router.push("/auth");
-};
+  router.push('/auth')
+}
 
 const forgotPassword = () => {
-  router.push("");
+  router.push('')
   //TODO
-};
+}
 
-const submitForm = () => {};
+const submitForm = () => {}
 </script>
 
 <template>
   <section>
     <div class="">
-      <h1>{{ t("common.loginTitle") }}</h1>
+      <h1>{{ t('common.loginTitle') }}</h1>
       <form @submit.prevent="submitForm">
         <div>
-          <label :for="emailInputId">{{ t("lables.emailLogin") }}</label>
+          <label :for="emailInputId">{{ t('lables.emailLogin') }}</label>
           <Input
-          :focus="shouldBeFocused"
+            :focus="shouldBeFocused"
             v-model:model-value="email"
             :name="emailName"
             :placeholder="emailPlaceholder"
@@ -53,7 +52,9 @@ const submitForm = () => {};
           <p>{{ email }}</p>
         </div>
         <div>
-          <label :for="newPasswordInputId">{{ t("lables.passwordLogin") }}</label>
+          <label :for="newPasswordInputId">{{
+            t('lables.passwordLogin')
+          }}</label>
           <Input
             v-model:model-value="password"
             :name="passwordName"
@@ -64,11 +65,11 @@ const submitForm = () => {};
           <p>{{ password }}</p>
         </div>
         <div>
-          <Button>{{ t("buttons.submitLogin") }}</Button>
+          <Button>{{ t('buttons.submitLogin') }}</Button>
         </div>
       </form>
-      <Button @click="goBack">{{ t("buttons.return") }}</Button>
-      <Button @click="forgotPassword">{{ t("buttons.forgotPassword") }}</Button>
+      <Button @click="goBack">{{ t('buttons.return') }}</Button>
+      <Button @click="forgotPassword">{{ t('buttons.forgotPassword') }}</Button>
     </div>
   </section>
 </template>

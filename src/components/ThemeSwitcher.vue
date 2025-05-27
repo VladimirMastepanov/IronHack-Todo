@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import Button from "../shared/Button.vue";
-import { useThemeStore } from "../store/theme";
-import LightThemeIcon from "../assets/light_mode.svg";
-import DarkThemeIcon from "../assets/dark_mode.svg";
-import { storeToRefs } from "pinia";
+import Button from '../shared/Button.vue'
+import { useThemeStore } from '../store/theme'
+import LightThemeIcon from '../assets/light_mode.svg'
+import DarkThemeIcon from '../assets/dark_mode.svg'
+import { storeToRefs } from 'pinia'
 
-const themeStore = useThemeStore();
-const { isLightTheme } = storeToRefs(themeStore);
-const { toggleTheme } = themeStore;
+const themeStore = useThemeStore()
+const { isLightTheme } = storeToRefs(themeStore)
+const { toggleTheme } = themeStore
 </script>
 
 <template>
@@ -29,6 +29,5 @@ const { toggleTheme } = themeStore;
   height: 1.2em;
   width: auto;
   display: flex;
-
 }
 </style>

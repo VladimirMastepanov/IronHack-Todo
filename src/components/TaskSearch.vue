@@ -1,23 +1,23 @@
 <script setup lang="ts">
-import { useI18n } from "vue-i18n";
-import Input from "../shared/Input.vue";
-import { ref } from "vue";
-import { useSearch } from "../store/search";
+import { useI18n } from 'vue-i18n'
+import Input from '../shared/Input.vue'
+import { ref } from 'vue'
+import { useSearch } from '../store/search'
 
-const { setSearchTerm } = useSearch();
-const { t } = useI18n();
+const { setSearchTerm } = useSearch()
+const { t } = useI18n()
 
-const searchTerm = ref<string>(""),
-  searchName = "search",
-  searchType = "search",
-  searchPlaceholder = "placeholders.searchTasks",
-  searchLabele = t("labels.search");
+const searchTerm = ref<string>(''),
+  searchName = 'search',
+  searchType = 'search',
+  searchPlaceholder = 'placeholders.searchTasks',
+  searchLabele = t('labels.search')
 
-  const shouldBeFocused = ref<boolean>(true);
+const shouldBeFocused = ref<boolean>(true)
 
 const onSearch = () => {
-  setSearchTerm(searchTerm.value.trim().toLowerCase());
-};
+  setSearchTerm(searchTerm.value.trim().toLowerCase())
+}
 </script>
 
 <template>

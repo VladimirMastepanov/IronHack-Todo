@@ -1,123 +1,124 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import {
-  type EditedTaskDescription,
-  type ImportanceType,
-} from "../types/types";
-import Button from "../shared/Button.vue";
-import Textarea from "../shared/Textarea.vue";
-import { useTasks } from "../store/task";
-import { storeToRefs } from "pinia";
-import { onMounted } from "vue";
-import { useI18n } from "vue-i18n";
-import { useSort } from "../store/sort";
-import { computed } from "vue";
-import ArrowDownSvg from "../assets/arrow_down.svg";
-import ArrowUpSvg from "../assets/arrow_up.svg";
-import CheckOutlineIcon from "../assets/check_box_outline.svg";
-import CheckDoneIcon from "../assets/check_box_done.svg";
-import DeleteIcon from "../assets/delete.svg";
-import { useSearch } from "../store/search";
-import { getFiltredTasks } from "../features/getFiltredTasks";
-import { getSortedTasks } from "../features/getSortedTasks";
-import Select from "../shared/Select.vue";
-import Modal from "../shared/Modal.vue";
-import { COLOR_OPTIONS } from "../constants";
+import { ref } from 'vue'
+import { type EditedTaskDescription, type ImportanceType } from '../types/types'
+import Button from '../shared/Button.vue'
+import Textarea from '../shared/Textarea.vue'
+import { useTasks } from '../store/task'
+import { storeToRefs } from 'pinia'
+import { onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { useSort } from '../store/sort'
+import { computed } from 'vue'
+import ArrowDownSvg from '../assets/arrow_down.svg'
+import ArrowUpSvg from '../assets/arrow_up.svg'
+import CheckOutlineIcon from '../assets/check_box_outline.svg'
+import CheckDoneIcon from '../assets/check_box_done.svg'
+import DeleteIcon from '../assets/delete.svg'
+import { useSearch } from '../store/search'
+import { getFiltredTasks } from '../features/getFiltredTasks'
+import { getSortedTasks } from '../features/getSortedTasks'
+import Select from '../shared/Select.vue'
+import Modal from '../shared/Modal.vue'
+import { COLOR_OPTIONS } from '../constants'
 
-//TODO 
+//TODO
 //отмены изменения важности
-const searchStore = useSearch();
-const sortStore = useSort();
-const { sortBy } = storeToRefs(sortStore);
+const searchStore = useSearch()
+const sortStore = useSort()
+const { sortBy } = storeToRefs(sortStore)
 
-const tasksStore = useTasks();
-const { tasks } = storeToRefs(tasksStore);
-const { removeTaskFromDb, updateTaskInDb, toggleTaskIsDone } = tasksStore;
+const tasksStore = useTasks()
+const { tasks } = storeToRefs(tasksStore)
+const { removeTaskFromDb, updateTaskInDb, toggleTaskIsDone } = tasksStore
 
 onMounted(async () => {
-  tasksStore.getTasksFromDb();
-});
+  tasksStore.getTasksFromDb()
+})
 
 const tasksForDisplay = computed(() => {
   if (searchStore.searchTerm.length > 0) {
-    const filtred = getFiltredTasks(tasks.value, searchStore.searchTerm);
-    return getSortedTasks(filtred, sortBy.value);
+    const filtred = getFiltredTasks(tasks.value, searchStore.searchTerm)
+    return getSortedTasks(filtred, sortBy.value)
   } else {
-    return getSortedTasks(tasks.value, sortBy.value);
+    return getSortedTasks(tasks.value, sortBy.value)
   }
-});
+})
 
-const { t } = useI18n();
+const { t } = useI18n()
 
-const isModalOpen = ref<boolean>(false);
-const taskIdForRemove = ref<number | null>(null);
+const isModalOpen = ref<boolean>(false)
+const taskIdForRemove = ref<number | null>(null)
 
-const taskText = ref<string>(""),
+const taskText = ref<string>(''),
   taskImpartance = ref<ImportanceType>(1),
-  taskInputName = "",
-  taskInputLabel = t("labels.new"),
+  taskInputName = '',
+  taskInputLabel = t('labels.new'),
   isSubmitting = ref<boolean>(false),
-  taskErrorMessage = ref<string>("");
+  taskErrorMessage = ref<string>('')
 
-  const shouldBeFocused = ref<boolean>(true);
+const shouldBeFocused = ref<boolean>(true)
 
-const originalTask = ref<EditedTaskDescription | null>(null);
-const getTaskInputId = (id: number): string => `task-input-${id}`;
+const originalTask = ref<EditedTaskDescription | null>(null)
+const getTaskInputId = (id: number): string => `task-input-${id}`
 
-const openedCardId = ref<number | null>(null);
+const openedCardId = ref<number | null>(null)
 const openCard = (id: number): void => {
-  const currentTask = tasks.value.find((t) => t.id === id);
-  openedCardId.value = id;
+  const currentTask = tasks.value.find((t) => t.id === id)
+  openedCardId.value = id
   if (currentTask) {
     originalTask.value = {
       text: currentTask.text,
       importance: currentTask.importance,
-    };
-    taskText.value = currentTask.text;
-    taskImpartance.value = currentTask.importance;
+    }
+    taskText.value = currentTask.text
+    taskImpartance.value = currentTask.importance
   }
-};
+}
 const closeCard = (): void => {
-  taskText.value = "";
-  taskImpartance.value = 1;
-  openedCardId.value = null;
-  taskIdForRemove.value = null;
-};
+  taskText.value = ''
+  taskImpartance.value = 1
+  openedCardId.value = null
+  taskIdForRemove.value = null
+}
 
-const saveChanges = async (id: number, text: string, importance: ImportanceType) => {
-  taskErrorMessage.value = "";
+const saveChanges = async (
+  id: number,
+  text: string,
+  importance: ImportanceType
+) => {
+  taskErrorMessage.value = ''
   if (taskText.value.length === 0) {
-    taskErrorMessage.value = t("errors.emptyError");
+    taskErrorMessage.value = t('errors.emptyError')
   } else {
-    isSubmitting.value = true;
-    await updateTaskInDb(id, text, importance);
-    closeCard();
-    isSubmitting.value = false;
+    isSubmitting.value = true
+    await updateTaskInDb(id, text, importance)
+    closeCard()
+    isSubmitting.value = false
   }
-};
+}
 
 const cancelChanges = (): void => {
   if (originalTask.value && openedCardId.value !== null) {
-    taskText.value = originalTask.value.text;
-    taskImpartance.value = originalTask.value.importance;
+    taskText.value = originalTask.value.text
+    taskImpartance.value = originalTask.value.importance
   }
-};
+}
 
 const onDeleteCkick = (id: number) => {
-  taskIdForRemove.value = id;
-  isModalOpen.value = true;
-};
+  taskIdForRemove.value = id
+  isModalOpen.value = true
+}
 
 const deleteTask = async () => {
-  isSubmitting.value = true;
+  isSubmitting.value = true
   if (taskIdForRemove.value) {
-    await removeTaskFromDb(taskIdForRemove.value);
+    await removeTaskFromDb(taskIdForRemove.value)
   }
-  taskIdForRemove.value = null;
-  isSubmitting.value = false;
-  isModalOpen.value = false;
-  closeCard();
-};
+  taskIdForRemove.value = null
+  isSubmitting.value = false
+  isModalOpen.value = false
+  closeCard()
+}
 </script>
 
 <template>
@@ -158,7 +159,7 @@ const deleteTask = async () => {
                       >{{ taskInputLabel }}</label
                     >
                     <Textarea
-                    :focus="shouldBeFocused"
+                      :focus="shouldBeFocused"
                       class="textarea"
                       v-model="taskText"
                       :name="taskInputName"
@@ -167,10 +168,10 @@ const deleteTask = async () => {
                     />
                   </div>
                   <div class="error-container">
-                    <p class="error">{{ taskErrorMessage || "\u00A0" }}</p>
+                    <p class="error">{{ taskErrorMessage || '\u00A0' }}</p>
                   </div>
                   <div class="task-form-row settings">
-                    <label>{{ t("labels.importance") }}</label>
+                    <label>{{ t('labels.importance') }}</label>
                     <Select
                       v-model="taskImpartance"
                       :option="task.importance"
@@ -200,12 +201,12 @@ const deleteTask = async () => {
 
                     <div class="buttons">
                       <Button :disabled="isSubmitting" @click="cancelChanges">{{
-                        t("buttons.cancel")
+                        t('buttons.cancel')
                       }}</Button>
                       <Button
                         :disabled="isSubmitting"
                         @click="saveChanges(task.id, taskText, taskImpartance)"
-                        >{{ t("buttons.save") }}</Button
+                        >{{ t('buttons.save') }}</Button
                       >
                     </div>
                   </div>
@@ -218,7 +219,7 @@ const deleteTask = async () => {
     </div>
     <Modal v-model="isModalOpen">
       <div class="modal-content">
-        <h4>{{ t("labels.confirmation") }}</h4>
+        <h4>{{ t('labels.confirmation') }}</h4>
         <Button :disabled="isSubmitting" @click="deleteTask">
           <DeleteIcon fill="var(--color-on-secondary)" class="delete-icon"
         /></Button>

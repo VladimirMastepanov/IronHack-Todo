@@ -1,27 +1,27 @@
 <script setup lang="ts">
-import { useI18n } from "vue-i18n";
-import Button from "../shared/Button.vue";
-import SortByAlphaSvg from "../assets/sort_by_alpha.svg";
-import SortByStatus from "../assets/format-list-checks.svg";
-import SortByImportance from "../assets/priority_high.svg";
-import { useRouter } from "vue-router";
-import { useSort } from "../store/sort";
+import { useI18n } from 'vue-i18n'
+import Button from '../shared/Button.vue'
+import SortByAlphaSvg from '../assets/sort_by_alpha.svg'
+import SortByStatus from '../assets/format-list-checks.svg'
+import SortByImportance from '../assets/priority_high.svg'
+import { useRouter } from 'vue-router'
+import { useSort } from '../store/sort'
 
-const { t } = useI18n();
-const router = useRouter();
-const { sortByText, sortByStatus, sortByImportance } = useSort();
+const { t } = useI18n()
+const router = useRouter()
+const { sortByText, sortByStatus, sortByImportance } = useSort()
 
-const buttonAddBackground = "var(--color-on-secondary)";
-const buttonAddColor = "var(--color-secondary)";
-const buttonAddRipple = "var(--color-error)";
+const buttonAddBackground = 'var(--color-on-secondary)'
+const buttonAddColor = 'var(--color-secondary)'
+const buttonAddRipple = 'var(--color-error)'
 
-const buttonControlBackground = "var(--color-on-primary)";
-const buttonControlColor = "var(--color-primary)";
-const buttonControlRipple = "var(--color-error)";
+const buttonControlBackground = 'var(--color-on-primary)'
+const buttonControlColor = 'var(--color-primary)'
+const buttonControlRipple = 'var(--color-error)'
 
 const toAddTask = () => {
-  router.push("/taskform");
-};
+  router.push('/taskform')
+}
 </script>
 
 <template>
@@ -59,7 +59,7 @@ const toAddTask = () => {
       @click="toAddTask"
     >
       <div class="add-task">
-        <p>{{ t("buttons.addTask") }}</p>
+        <p>{{ t('buttons.addTask') }}</p>
       </div>
     </Button>
   </section>
@@ -82,7 +82,7 @@ const toAddTask = () => {
   padding: 0;
   height: 1.2em;
   width: auto;
-  display: flex
+  display: flex;
 }
 .add-task {
   display: flex;

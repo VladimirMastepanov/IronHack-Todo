@@ -1,3 +1,3 @@
 interface HTMLElement {
-  __rippleHandler__?: EventListener;
+  __rippleHandler__?: EventListener
 }

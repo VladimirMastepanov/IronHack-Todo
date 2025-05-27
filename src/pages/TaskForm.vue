@@ -1,50 +1,48 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import Button from "../shared/Button.vue";
-import Textarea from "../shared/Textarea.vue";
-import { useRouter } from "vue-router";
-import { useTasks } from "../store/task";
-import { useUser } from "../store/user";
-import { storeToRefs } from "pinia";
-import { useI18n } from "vue-i18n";
-import ArrowBackIcon from '../assets/arrow_back.svg';
-import Select from "../shared/Select.vue";
-import type { ImportanceType } from "../types/types";
+import { ref } from 'vue'
+import Button from '../shared/Button.vue'
+import Textarea from '../shared/Textarea.vue'
+import { useRouter } from 'vue-router'
+import { useTasks } from '../store/task'
+import { useUser } from '../store/user'
+import { useI18n } from 'vue-i18n'
+import ArrowBackIcon from '../assets/arrow_back.svg'
+import Select from '../shared/Select.vue'
+import type { ImportanceType } from '../types/types'
 
-const router = useRouter();
-const tasksStore = useTasks();
-const { tasks } = storeToRefs(tasksStore);
-const { user } = useUser();
-const { insertTaskToDb } = tasksStore;
-const { t } = useI18n();
+const router = useRouter()
+const tasksStore = useTasks()
+const { user } = useUser()
+const { insertTaskToDb } = tasksStore
+const { t } = useI18n()
 
-const taskText = ref<string>(""),
+const taskText = ref<string>(''),
   taskImpartance = ref<ImportanceType>(3),
-  taskInputName = "",
-  taskInputLabel = t("labels.new"),
-  taskInputId = "add-task-form",
-  taskErrorMessage = ref<string>(""),
-  isSubmitting = ref<boolean>(false);
+  taskInputName = '',
+  taskInputLabel = t('labels.new'),
+  taskInputId = 'add-task-form',
+  taskErrorMessage = ref<string>(''),
+  isSubmitting = ref<boolean>(false)
 
-  const shouldBeFocused = ref<boolean>(true);
+const shouldBeFocused = ref<boolean>(true)
 
 const closeForm = (): void => {
-  router.push("/");
-};
+  router.push('/')
+}
 
 const saveChanges = async () => {
-  taskErrorMessage.value = "";
+  taskErrorMessage.value = ''
   if (taskText.value.length === 0) {
-    taskErrorMessage.value = t("errors.emptyError");
+    taskErrorMessage.value = t('errors.emptyError')
   } else {
-    isSubmitting.value = true;
+    isSubmitting.value = true
     if (user && user.id) {
-      await insertTaskToDb(taskText.value, user.id, taskImpartance.value);
-      router.push("/");
+      await insertTaskToDb(taskText.value, user.id, taskImpartance.value)
+      router.push('/')
     }
-    isSubmitting.value = false;
+    isSubmitting.value = false
   }
-};
+}
 </script>
 
 <template>
@@ -56,7 +54,7 @@ const saveChanges = async () => {
             taskInputLabel
           }}</label>
           <Textarea
-          :focus="shouldBeFocused"
+            :focus="shouldBeFocused"
             class="textarea"
             v-model="taskText"
             :name="taskInputName"
@@ -64,22 +62,18 @@ const saveChanges = async () => {
             :disabled="isSubmitting"
           />
         </div>
-        <p class="error">{{ taskErrorMessage || "\u00A0" }}</p>
+        <p class="error">{{ taskErrorMessage || '\u00A0' }}</p>
         <div class="task-form-row controls">
-          <label>{{ t("labels.importance") }}</label>
+          <label>{{ t('labels.importance') }}</label>
           <Select v-model="taskImpartance" :option="taskImpartance" />
         </div>
 
         <div class="task-form-row buttons">
-          <Button
-            :disabled="tasks.length === 0 || isSubmitting"
-            @click="closeForm"
-            >
+          <Button :disabled="isSubmitting" @click="closeForm">
             <ArrowBackIcon fill="var(--color-on-secondary)" class="svg" />
-            </Button
-          >
+          </Button>
           <Button @click="saveChanges" :disabled="isSubmitting">{{
-            t("buttons.save")
+            t('buttons.save')
           }}</Button>
         </div>
       </div>
@@ -93,7 +87,6 @@ const saveChanges = async () => {
   flex-direction: column;
   width: 100%;
   height: 100%;
-  
 }
 .svg {
   padding: 0;

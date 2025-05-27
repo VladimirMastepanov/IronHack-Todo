@@ -1,26 +1,26 @@
 <script setup lang="ts">
-import { useI18n } from "vue-i18n";
+import { useI18n } from 'vue-i18n'
 
 const props = defineProps<{
-  modelValue: string;
-  name: string;
-  id: string;
-  focus?: boolean;
-  errorMessage?: string;
-  hasError?: string;
-}>();
-const { id, name } = props;
-const { t } = useI18n();
+  modelValue: string
+  name: string
+  id: string
+  focus?: boolean
+  errorMessage?: string
+  hasError?: string
+}>()
+const { id, name } = props
+const { t } = useI18n()
 const emit = defineEmits<{
-  "update:modelValue": [value: string];
-  input: [event: Event];
-}>();
+  'update:modelValue': [value: string]
+  input: [event: Event]
+}>()
 
 const onInput = (event: Event) => {
-  const value = (event.target as HTMLInputElement).value;
-  emit("update:modelValue", value);
-  emit("input", event);
-};
+  const value = (event.target as HTMLInputElement).value
+  emit('update:modelValue', value)
+  emit('input', event)
+}
 </script>
 
 <template>
