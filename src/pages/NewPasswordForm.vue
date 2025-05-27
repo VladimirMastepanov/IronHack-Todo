@@ -10,6 +10,8 @@ import {
   isPassvordLengthValid,
   isPasswordMarch,
 } from '../features/handleFormCheck'
+import { onMounted } from 'vue'
+import { supabase } from '../store/supabase'
 const { t } = useI18n()
 const router = useRouter()
 const { updateUser } = useUser()
@@ -20,13 +22,26 @@ const passwordName = 'password',
   passwordType = 'password'
 
 const password = ref<string>(''),
-  passwordConf = ref<string>('')
+  passwordConf = ref<string>(''),
+  message = ref<string>('')
 
 const isSubmitting = ref<boolean>(false)
 
 const passwordError = ref<string>('')
 
 const shouldBeFocused = ref<boolean>(true)
+
+onMounted(async () => {
+  const hash = new URLSearchParams(window.location.hash.slice(1))
+  const access_token = hash.get('access_token')
+  const refresh_token = hash.get('refresh_token') || ''
+  const type = hash.get('type')
+  if (type === 'recovery' && access_token) {
+    await supabase.auth.setSession({ access_token, refresh_token })
+  } else {
+    message.value = t('auth.invalid_link')
+  }
+})
 
 const submitForm = async () => {
   isSubmitting.value = true
@@ -94,6 +109,7 @@ const submitForm = async () => {
           }}</Button>
         </div>
       </form>
+      <p v-if="message">{{ message }}</p>
     </div>
   </section>
 </template>
