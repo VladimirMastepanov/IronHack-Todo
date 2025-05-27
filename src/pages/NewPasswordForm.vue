@@ -38,6 +38,7 @@ onMounted(async () => {
   const type = hash.get('type')
   if (type === 'recovery' && access_token) {
     await supabase.auth.setSession({ access_token, refresh_token })
+    window.history.replaceState({}, '', window.location.pathname)
   } else {
     message.value = t('auth.invalid_link')
   }
