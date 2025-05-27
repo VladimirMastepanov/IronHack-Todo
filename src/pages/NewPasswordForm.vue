@@ -28,7 +28,6 @@ const passwordError = ref<string>('')
 
 const shouldBeFocused = ref<boolean>(true)
 
-
 const submitForm = async () => {
   isSubmitting.value = true
   passwordError.value = ''
