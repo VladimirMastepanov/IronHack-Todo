@@ -57,6 +57,7 @@
   --space-2xl: 48px;
   --space-3xl: 64px;
   --space-4xl: 96px;
+  --space-5xl: 160px;
 
   /* BORDER-RADIUS */
   --radius-xs: 4px;
@@ -90,11 +91,24 @@ input {
 }
 
 #app {
-  max-width: 1280px;
+  max-width: 1024px;
   margin: 0 auto;
   padding: 2rem;
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
   text-align: center;
+}
+
+@media (min-width: 768px) {
+  #app {
+    padding-left: var(--space-4xl);
+    padding-right: var(--space-4xl);
+  }
+}
+@media (min-width: 1024px) {
+  #app {
+    padding-left: var(--space-5xl);
+    padding-right: var(--space-5xl);
+  }
 }

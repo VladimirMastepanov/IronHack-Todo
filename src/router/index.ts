@@ -63,13 +63,9 @@ router.beforeEach(async (to) => {
   if (
     store.isAuth &&
     to.name &&
-    [
-      'AuthComponent',
-      'Login',
-      'Signup',
-      'ForgotPassword',
-      // 'NewPassword',
-    ].includes(to.name as string)
+    ['AuthComponent', 'Login', 'Signup', 'ForgotPassword'].includes(
+      to.name as string
+    )
   ) {
     return { name: 'Dashboard' }
   }
