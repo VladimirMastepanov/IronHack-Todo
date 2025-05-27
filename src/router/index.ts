@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useUser } from '../store/user'
+import { supabase } from '../store/supabase'
 
 const routes = [
   {
@@ -75,4 +76,13 @@ router.beforeEach(async (to) => {
 
   return true
 })
+
+router.isReady().then(() => {
+  supabase.auth.onAuthStateChange((event) => {
+    if (event === 'PASSWORD_RECOVERY') {
+      router.push({ name: 'NewPassword' })
+    }
+  })
+})
+
 export default router
