@@ -21,8 +21,6 @@ import Select from '../shared/Select.vue'
 import Modal from '../shared/Modal.vue'
 import { COLOR_OPTIONS } from '../constants'
 
-//TODO
-//отмены изменения важности
 const searchStore = useSearch()
 const sortStore = useSort()
 const { sortBy } = storeToRefs(sortStore)
@@ -132,20 +130,20 @@ const deleteTask = async () => {
                 <ArrowDownSvg
                   @click="openCard(task.id)"
                   class="svg"
-                  :fill="COLOR_OPTIONS[task.importance]"
+                  fill="var(--color-on-surface)"
                 />
                 <p>{{ task.text }}</p>
                 <CheckDoneIcon
                   :key="`done-${task.id}`"
                   @click="toggleTaskIsDone(task.id, task.isDone)"
-                  fill="var(--color-on-surface)"
+                  :fill="COLOR_OPTIONS[task.importance]"
                   class="svg"
                   v-if="task.isDone"
                 />
                 <CheckOutlineIcon
                   :key="`outline-${task.id}`"
                   @click="toggleTaskIsDone(task.id, task.isDone)"
-                  fill="var(--color-on-surface)"
+                  :fill="COLOR_OPTIONS[task.importance]"
                   class="svg"
                   v-else
                 />

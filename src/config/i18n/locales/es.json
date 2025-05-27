@@ -43,7 +43,8 @@
     "dropLimits": "Tamaño máximo: 5 MB. Solo JPG o PNG.",
     "avatarPreviewAlt": "Vista previa del avatar",
     "haveAccount": "¿Ya tienes una cuenta?",
-    "firstTime": "¿Primera vez aquí?"
+    "firstTime": "¿Primera vez aquí?",
+    "reset_password_message": "Si este correo electrónico está registrado, hemos enviado un enlace para restablecer tu contraseña. Por favor, revisa tu bandeja de entrada."
   },
   "errors": {
     "invalidEmail": "Introduce una dirección de correo electrónico válida.",

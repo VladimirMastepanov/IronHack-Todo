@@ -12,8 +12,7 @@
 
   color-scheme: dark light;
   background-color: var(--color-surface);
-  /* background-color: var(--color-on-secondary); */
-  /* background-color: var(--color-inverse-on-surface); */
+
   color: var(--color-primary);
 
   font-synthesis: none;

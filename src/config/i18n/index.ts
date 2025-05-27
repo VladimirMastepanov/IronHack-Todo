@@ -4,7 +4,9 @@ import es from './locales/es.json'
 
 type MessageSchema = typeof en
 
-export const i18n = createI18n<[MessageSchema], 'en' | 'es'>({
+type laguagesType = 'en' | 'es'
+
+export const i18n = createI18n<[MessageSchema], laguagesType>({
   legacy: false,
   locale: 'en',
   messages: {

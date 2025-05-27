@@ -106,7 +106,6 @@ const selectOption = (option: ImportanceType) => {
   width: 1.5rem;
   height: 1.5rem;
   border-radius: var(--radius-round);
-  color: rgb(14, 10, 10);
   z-index: 100;
   box-sizing: border-box;
   border: 2px var(--color-outline) solid;

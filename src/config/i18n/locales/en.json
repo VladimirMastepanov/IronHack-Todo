@@ -43,7 +43,8 @@
     "dropLimits": "Max size 5 MB. JPG or PNG only.",
     "avatarPreviewAlt": "Avatar preview",
     "haveAccount": "Already have an account?",
-    "firstTime": "First time here?"
+    "firstTime": "First time here?",
+    "reset_password_message": "If this email is registered, we have sent a link to reset your password. Please check your inbox."
   },
   "errors": {
     "invalidEmail": "Please enter a valid email address.",

@@ -4,88 +4,131 @@ import Input from '../shared/Input.vue'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
-
+import { useUser } from '../store/user'
+import PreloadSpinner from '../assets/preload.svg'
+import {
+  isPassvordLengthValid,
+  isPasswordMarch,
+} from '../features/handleFormCheck'
 const { t } = useI18n()
 const router = useRouter()
+const { updateUser } = useUser()
 
-const emailName = 'email',
-  passwordName = 'password',
-  emailPlaceholder = 'placeholders.email',
+const passwordName = 'password',
+  passwordConfigName = 'passwordConfig',
   passwordPlaceholder = 'placeholders.password',
-  emailType = 'email',
-  passwordType = 'password',
-  emailInputId = 'emailconfirmation',
-  newPasswordInputId = 'new-password'
+  passwordType = 'password'
 
-const email = ref(''),
-  password = ref('')
+const password = ref<string>(''),
+  passwordConf = ref<string>('')
+
+const isSubmitting = ref<boolean>(false)
+
+const passwordError = ref<string>('')
 
 const shouldBeFocused = ref<boolean>(true)
 
-const goBack = () => {
-  router.push('/auth')
-}
+const submitForm = async () => {
+  isSubmitting.value = true
+  passwordError.value = ''
 
-const forgotPassword = () => {
-  router.push('')
-  //TODO
-}
+  passwordError.value = isPasswordMarch(password.value, passwordConf.value)
+    ? ''
+    : t('errors.passwordsDontMatch')
+  passwordError.value = isPassvordLengthValid(
+    password.value,
+    passwordConf.value
+  )
+    ? ''
+    : t('errors.invalidPassword')
 
-const submitForm = () => {}
+  if (!passwordError.value) {
+    await updateUser(password.value)
+    router.push('/')
+  }
+
+  isSubmitting.value = false
+}
 </script>
 
 <template>
   <section>
-    <div class="">
-      <h1>{{ t('common.loginTitle') }}</h1>
-      <form @submit.prevent="submitForm">
-        <div>
-          <label :for="emailInputId">{{ t('lables.emailLogin') }}</label>
+    <div class="form-container">
+      <PreloadSpinner v-if="isSubmitting" class="spinner" />
+
+      <h1>{{ t('common.signUpTitle') }}</h1>
+      <form
+        @submit.prevent="submitForm"
+        :aria-disabled="isSubmitting"
+        novalidate
+      >
+        <div class="input-grup">
+          <label :for="passwordName">{{ t('labels.passwordSign') }}</label>
           <Input
-            :focus="shouldBeFocused"
-            v-model:model-value="email"
-            :name="emailName"
-            :placeholder="emailPlaceholder"
-            :type="emailType"
-            :id="emailInputId"
-          />
-          <p>{{ email }}</p>
-        </div>
-        <div>
-          <label :for="newPasswordInputId">{{
-            t('lables.passwordLogin')
-          }}</label>
-          <Input
+            v-focus="shouldBeFocused"
             v-model:model-value="password"
             :name="passwordName"
+            :id="passwordName"
             :placeholder="passwordPlaceholder"
             :type="passwordType"
-            :id="newPasswordInputId"
+            :disabled="isSubmitting"
           />
-          <p>{{ password }}</p>
+          <p class="error">{{ passwordError || '\u00A0' }}</p>
         </div>
-        <div>
-          <Button>{{ t('buttons.submitLogin') }}</Button>
+        <div class="input-grup">
+          <label :for="passwordConf">{{ t('labels.passwordConfirm') }}</label>
+          <Input
+            v-model:model-value="passwordConf"
+            :name="passwordConfigName"
+            :id="passwordConfigName"
+            :placeholder="passwordPlaceholder"
+            :type="passwordType"
+            :disabled="isSubmitting"
+          />
+          <p class="error">{{ passwordError || '\u00A0' }}</p>
+        </div>
+
+        <div class="submit">
+          <Button type="submit" :disabled="isSubmitting">{{
+            t('buttons.submitSign')
+          }}</Button>
         </div>
       </form>
-      <Button @click="goBack">{{ t('buttons.return') }}</Button>
-      <Button @click="forgotPassword">{{ t('buttons.forgotPassword') }}</Button>
     </div>
   </section>
 </template>
 
 <style scoped>
-.auth-main {
+.form-container {
+  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  align-items: stretch;
-  padding: var(--space-md);
-  gap: var(--space-md);
 }
-.auth-main div {
+.submit {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  justify-content: end;
+}
+.go-back {
+  position: absolute;
+  bottom: 0;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: var(--space-3xl);
+  width: auto;
+}
+.error {
+  color: var(--color-error-container);
+  font-size: 0.7em;
+  text-align: left;
+  padding: 0 0 0 var(--space-md);
 }
 </style>
