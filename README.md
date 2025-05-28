@@ -45,3 +45,11 @@ https://docs.google.com/presentation/d/1gndzkDRAPEZ5r6s1yrM7Bqbro7ddRsRK77aZRxIb
 - **Styling**: Custom CSS with design tokens
 
 ## Screenshots
+<img width="384" alt="Screenshot 2025-05-27 at 19 42 40" src="https://github.com/user-attachments/assets/d910b137-830a-47c7-bdf8-9dd8fe5ebbfd" />
+<img width="382" alt="Screenshot 2025-05-27 at 19 43 11" src="https://github.com/user-attachments/assets/45ac0f4e-77c5-4bb2-acea-7cad77ed92d4" />
+<img width="384" alt="Screenshot 2025-05-27 at 19 44 00" src="https://github.com/user-attachments/assets/3a170734-e65e-425e-9a7a-64c5086aeb8a" />
+<img width="385" alt="Screenshot 2025-05-27 at 19 41 31" src="https://github.com/user-attachments/assets/9e3c9ace-5dca-4964-bc64-ff6c83ec8977" />
+
+
+
+
