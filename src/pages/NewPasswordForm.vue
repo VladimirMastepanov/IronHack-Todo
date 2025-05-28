@@ -55,8 +55,6 @@ const submitForm = async () => {
   <section>
     <div class="form-container">
       <PreloadSpinner v-if="isSubmitting" class="spinner" />
-
-      <h1>{{ t('common.signUpTitle') }}</h1>
       <form
         @submit.prevent="submitForm"
         :aria-disabled="isSubmitting"
